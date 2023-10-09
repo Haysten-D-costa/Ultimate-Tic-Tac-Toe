@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <conio.h>
-#include "../../textstyling.h"
+#include "textstyling.h"
 
 #define MAX 3
 
@@ -9,10 +9,10 @@ int x = 0;
 int y = 0;
 int control = 0;
 bool count = true;
-char winGrids[10]; // the bigger grid....
 std::vector <std::pair<std::pair <int, int>, bool>> status;
 
 char plyr; // to check which player made the winning move...
+char winGrids[10] = {' ', ' ', ' ', ' ', ' ', ' ', ' ',' ', ' ', ' '}; // the bigger grid....
 char grid01[MAX][MAX] = {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}};
 char grid02[MAX][MAX] = {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}};
 char grid03[MAX][MAX] = {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}};
@@ -24,15 +24,14 @@ char grid08[MAX][MAX] = {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}};
 char grid09[MAX][MAX] = {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}};
 
 bool finalWinner();
-bool checkTie(char grid[MAX][MAX]);
 void display(); // Function to display the grids....
 void storeControl(); // Function to auto transfer control on player move....
 void place(char player); // Function to place 'X' or 'O' on respective grid respectively....
 void playerMove(char player); // Function to enable player 1 to make a move....
+bool checkTie(char grid[MAX][MAX]);
 bool checkWinner(char grid[MAX][MAX]);
 
 void storeControl() {
-    
     if ((x == 0) && (y == 0)) { control = 0; }
     else if ((x == 0) && (y == 1)) { control = 1; }
     else if ((x == 0) && (y == 2)) { control = 2; }
@@ -42,6 +41,7 @@ void storeControl() {
     else if ((x == 2) && (y == 0)) { control = 6; }
     else if ((x == 2) && (y == 1)) { control = 7; }
     else if ((x == 2) && (y == 2)) { control = 8; }
+    
     if(status[control+1].second) { // if that grid is already won....
         x = status[control+1].first.first;
         y = status[control+1].first.second;
@@ -59,8 +59,8 @@ void storeControl() {
     else if ((x == 2) && (y == 2)) { control = 8; }
 }
 void place(char player) {
-    count = false; // to disable the 'tab' functionality, after player plays his first move....
     
+    count = false; // to disable the 'tab' functionality, after player plays his first move....
     char(* ptr)[MAX]; // character pointer created, to access specific grids....
     if(control == 0) { ptr = grid01; } // point to specific grids, as per the control....
     else if(control == 1) { ptr = grid02; }
@@ -83,9 +83,10 @@ void place(char player) {
                 status[control+1].first.second = y;
                 // std::cout << "X : " << x << " and Y : " << y;
                 // system("pause");
-            }/* else if(checkTie(ptr)) {
+            } 
+            else if(checkTie(ptr)) {
                 winGrids[control+1] = '-';
-            }*/
+            }
             storeControl();
         }
     } else { 
@@ -98,7 +99,8 @@ void place(char player) {
                 status[control+1].first.second = y;
                 // std::cout << "X : " << x << " and Y : " << y;
                 // system("pause");
-            } else if(checkTie(ptr)) {
+            }
+             else if(checkTie(ptr)) {
                 winGrids[control+1] = '-';
             }
             storeControl();
@@ -133,6 +135,7 @@ void playerMove(char player) {
                 break; // after player makes a move, exit the while loop....
             }
         }
+        // system("pause");
     }
 }
 void display() {
@@ -218,35 +221,50 @@ bool finalTie() {
 bool finalWinner() {
     if ((winGrids[1] != ' ') && (winGrids[1] == winGrids[2]) && (winGrids[2] == winGrids[3])) {
         (winGrids[1] == 'X')? std::cout << "YOU WIN !\n" : std::cout << "YOU LOSE !\n";
-    } else if ((winGrids[1] != ' ') && (winGrids[1] == winGrids[1]) && (winGrids[2] == winGrids[3])) {
+    } else if ((winGrids[4] != ' ') && (winGrids[4] == winGrids[5]) && (winGrids[5] == winGrids[6])) {
+        (winGrids[4] == 'X')? std::cout << "YOU WIN !\n" : std::cout << "YOU LOSE !\n";
+    } else if ((winGrids[7] != ' ') && (winGrids[7] == winGrids[8]) && (winGrids[8] == winGrids[9])) {
+        (winGrids[7] == 'X')? std::cout << "YOU WIN !\n" : std::cout << "YOU LOSE !\n";
+    } else if ((winGrids[1] != ' ') && (winGrids[1] == winGrids[4]) && (winGrids[4] == winGrids[7])) {
         (winGrids[1] == 'X')? std::cout << "YOU WIN !\n" : std::cout << "YOU LOSE !\n";
-    } else if ((winGrids[1] != ' ') && (winGrids[1] == winGrids[1]) && (winGrids[2] == winGrids[3])) {
-        (winGrids[1] == 'X')? std::cout << "YOU WIN !\n" : std::cout << "YOU LOSE !\n";
-    } else if ((winGrids[1] != ' ') && (winGrids[1] == winGrids[1]) && (winGrids[1] == winGrids[1])) {
-        (winGrids[1] == 'X')? std::cout << "YOU WIN !\n" : std::cout << "YOU LOSE !\n";
-    } else if ((winGrids[1] != ' ') && (winGrids[2] == winGrids[2]) && (winGrids[2] == winGrids[2])) {
+    } else if ((winGrids[2] != ' ') && (winGrids[2] == winGrids[5]) && (winGrids[5] == winGrids[8])) {
         (winGrids[2] == 'X')? std::cout << "YOU WIN !\n" : std::cout << "YOU LOSE !\n";
-    } else if ((winGrids[2] != ' ') && (winGrids[3] == winGrids[3]) && (winGrids[3] == winGrids[3])) {
+    } else if ((winGrids[3] != ' ') && (winGrids[3] == winGrids[6]) && (winGrids[6] == winGrids[9])) {
         (winGrids[3] == 'X')? std::cout << "YOU WIN !\n" : std::cout << "YOU LOSE !\n";
-    } else if ((winGrids[1] != ' ') && (winGrids[1] == winGrids[2]) && (winGrids[2] == winGrids[3])) {
+    } else if ((winGrids[1] != ' ') && (winGrids[1] == winGrids[5]) && (winGrids[5] == winGrids[9])) {
         (winGrids[1] == 'X')? std::cout << "YOU WIN !\n" : std::cout << "YOU LOSE !\n";
-    } else if ((winGrids[3] != ' ') && (winGrids[3] == winGrids[2]) && (winGrids[2] == winGrids[1])) {
+    } else if ((winGrids[3] != ' ') && (winGrids[3] == winGrids[5]) && (winGrids[5] == winGrids[7])) {
         (winGrids[3] == 'X')? std::cout << "YOU WIN !\n" : std::cout << "YOU LOSE !\n";
     } else {
         return false;
     }
     return true;
+    for(int i=1; i<=9; i++) {
+        std::cout << winGrids[i] << ", ";
+    }
+    std::cout << std::endl;
+    // system("pause");
 }
 bool checkWinner(char grid[MAX][MAX]) {
-    if ((grid[0][0] != ' ') && (grid[0][0] == grid[0][1]) && (grid[0][1] == grid[0][2])) { } 
-    else if ((grid[1][0] != ' ') && (grid[1][0] == grid[1][1]) && (grid[1][1] == grid[1][2])) { } 
-    else if ((grid[2][0] != ' ') && (grid[2][0] == grid[2][1]) && (grid[2][1] == grid[2][2])) { } 
-    else if ((grid[0][0] != ' ') && (grid[0][0] == grid[1][0]) && (grid[1][0] == grid[2][0])) { } 
-    else if ((grid[0][1] != ' ') && (grid[0][1] == grid[1][1]) && (grid[1][1] == grid[2][1])) { } 
-    else if ((grid[0][2] != ' ') && (grid[0][2] == grid[1][2]) && (grid[1][2] == grid[2][2])) { } 
-    else if ((grid[0][0] != ' ') && (grid[0][0] == grid[1][1]) && (grid[1][1] == grid[2][2])) { } 
-    else if ((grid[0][2] != ' ') && (grid[0][2] == grid[1][1]) && (grid[1][1] == grid[2][0])) { } 
-    else { return false; }
+    if ((grid[0][0] != ' ') && (grid[0][0] == grid[0][1]) && (grid[0][1] == grid[0][2])) {
+        (grid[0][0] == 'X')? std::cout << "YOU WIN !\n" : std::cout << "YOU LOSE !\n";
+    } else if ((grid[1][0] != ' ') && (grid[1][0] == grid[1][1]) && (grid[1][1] == grid[1][2])) {
+        (grid[1][0] == 'X')? std::cout << "YOU WIN !\n" : std::cout << "YOU LOSE !\n";
+    } else if ((grid[2][0] != ' ') && (grid[2][0] == grid[2][1]) && (grid[2][1] == grid[2][2])) {
+        (grid[2][0] == 'X')? std::cout << "YOU WIN !\n" : std::cout << "YOU LOSE !\n";
+    } else if ((grid[0][0] != ' ') && (grid[0][0] == grid[1][0]) && (grid[1][0] == grid[2][0])) {
+        (grid[0][0] == 'X')? std::cout << "YOU WIN !\n" : std::cout << "YOU LOSE !\n";
+    } else if ((grid[0][1] != ' ') && (grid[0][1] == grid[1][1]) && (grid[1][1] == grid[2][1])) {
+        (grid[0][1] == 'X')? std::cout << "YOU WIN !\n" : std::cout << "YOU LOSE !\n";
+    } else if ((grid[0][2] != ' ') && (grid[0][2] == grid[1][2]) && (grid[1][2] == grid[2][2])) {
+        (grid[0][2] == 'X')? std::cout << "YOU WIN !\n" : std::cout << "YOU LOSE !\n";
+    } else if ((grid[0][0] != ' ') && (grid[0][0] == grid[1][1]) && (grid[1][1] == grid[2][2])) {
+        (grid[0][0] == 'X')? std::cout << "YOU WIN !\n" : std::cout << "YOU LOSE !\n";
+    } else if ((grid[0][2] != ' ') && (grid[0][2] == grid[1][1]) && (grid[1][1] == grid[2][0])) {
+        (grid[0][2] == 'X')? std::cout << "YOU WIN !\n" : std::cout << "YOU LOSE !\n";
+    } else {
+        return false;
+    }
     return true;
 }
 bool checkTie(char grid[MAX][MAX]) {
@@ -262,23 +280,22 @@ bool checkTie(char grid[MAX][MAX]) {
 }
 int main() {
 
-    for(int i=1; i<=9; i++) { status.push_back(std::make_pair(std::make_pair(0, 0), false)); }
-    for(int i=1; i<=9; i++) { winGrids[i] = ' '; }
+    for(int i=0; i<=9; i++) { 
+        status.push_back(std::make_pair(std::make_pair(0, 0), false)); 
+    }
     while(true) {
         playerMove('X');
-        finalWinner();
-        // if(finalWinner()) { break; }
-        // else if(finalTie()) {
-            // break;
-        // }
+        if(finalWinner()) { break; }
+        else if(finalTie()) {
+            break;
+        }
         playerMove('O');
-        finalWinner();
-        // if(finalWinner()) { break; }
-        // else if(finalTie()) {
-            // break;
-        // }
+        if(finalWinner()) { break; }
+        else if(finalTie()) {
+            break;
+        }
     }
     system("pause");
-    display();
+    // display();
     return 0;
 }
