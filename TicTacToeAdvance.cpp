@@ -246,25 +246,15 @@ bool finalWinner() {
     // system("pause");
 }
 bool checkWinner(char grid[MAX][MAX]) {
-    if ((grid[0][0] != ' ') && (grid[0][0] == grid[0][1]) && (grid[0][1] == grid[0][2])) {
-        (grid[0][0] == 'X')? std::cout << "YOU WIN !\n" : std::cout << "YOU LOSE !\n";
-    } else if ((grid[1][0] != ' ') && (grid[1][0] == grid[1][1]) && (grid[1][1] == grid[1][2])) {
-        (grid[1][0] == 'X')? std::cout << "YOU WIN !\n" : std::cout << "YOU LOSE !\n";
-    } else if ((grid[2][0] != ' ') && (grid[2][0] == grid[2][1]) && (grid[2][1] == grid[2][2])) {
-        (grid[2][0] == 'X')? std::cout << "YOU WIN !\n" : std::cout << "YOU LOSE !\n";
-    } else if ((grid[0][0] != ' ') && (grid[0][0] == grid[1][0]) && (grid[1][0] == grid[2][0])) {
-        (grid[0][0] == 'X')? std::cout << "YOU WIN !\n" : std::cout << "YOU LOSE !\n";
-    } else if ((grid[0][1] != ' ') && (grid[0][1] == grid[1][1]) && (grid[1][1] == grid[2][1])) {
-        (grid[0][1] == 'X')? std::cout << "YOU WIN !\n" : std::cout << "YOU LOSE !\n";
-    } else if ((grid[0][2] != ' ') && (grid[0][2] == grid[1][2]) && (grid[1][2] == grid[2][2])) {
-        (grid[0][2] == 'X')? std::cout << "YOU WIN !\n" : std::cout << "YOU LOSE !\n";
-    } else if ((grid[0][0] != ' ') && (grid[0][0] == grid[1][1]) && (grid[1][1] == grid[2][2])) {
-        (grid[0][0] == 'X')? std::cout << "YOU WIN !\n" : std::cout << "YOU LOSE !\n";
-    } else if ((grid[0][2] != ' ') && (grid[0][2] == grid[1][1]) && (grid[1][1] == grid[2][0])) {
-        (grid[0][2] == 'X')? std::cout << "YOU WIN !\n" : std::cout << "YOU LOSE !\n";
-    } else {
-        return false;
-    }
+    if ((grid[0][0] != ' ') && (grid[0][0] == grid[0][1]) && (grid[0][1] == grid[0][2])) { } 
+    else if ((grid[1][0] != ' ') && (grid[1][0] == grid[1][1]) && (grid[1][1] == grid[1][2])) { } 
+    else if ((grid[2][0] != ' ') && (grid[2][0] == grid[2][1]) && (grid[2][1] == grid[2][2])) { } 
+    else if ((grid[0][0] != ' ') && (grid[0][0] == grid[1][0]) && (grid[1][0] == grid[2][0])) { } 
+    else if ((grid[0][1] != ' ') && (grid[0][1] == grid[1][1]) && (grid[1][1] == grid[2][1])) { } 
+    else if ((grid[0][2] != ' ') && (grid[0][2] == grid[1][2]) && (grid[1][2] == grid[2][2])) { } 
+    else if ((grid[0][0] != ' ') && (grid[0][0] == grid[1][1]) && (grid[1][1] == grid[2][2])) { } 
+    else if ((grid[0][2] != ' ') && (grid[0][2] == grid[1][1]) && (grid[1][1] == grid[2][0])) { } 
+    else { return false; }
     return true;
 }
 bool checkTie(char grid[MAX][MAX]) {
