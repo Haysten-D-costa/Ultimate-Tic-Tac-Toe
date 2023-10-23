@@ -2,7 +2,7 @@
 #include <vector>
 #include <conio.h>
 #include "textstyling.h"
-
+#include <unistd.h>
 #define MAX 3
 
 int x = 0;
@@ -31,6 +31,9 @@ void playerMove(char player); // Function to enable player 1 to make a move....
 bool checkTie(char grid[MAX][MAX]);
 bool checkWinner(char grid[MAX][MAX]);
 
+void clearScreen() {
+    std::cout << "\033[2J\033[H"; // Clear screen and move cursor to (0,0)
+}
 void storeControl() {
     if ((x == 0) && (y == 0)) { control = 0; }
     else if ((x == 0) && (y == 1)) { control = 1; }
@@ -45,8 +48,6 @@ void storeControl() {
     if(status[control+1].second) { // if that grid is already won....
         x = status[control+1].first.first;
         y = status[control+1].first.second;
-        // std::cout << "X : "<< x << " and Y : " << y << std::endl;
-        // system("PAUSE");
     }
     if ((x == 0) && (y == 0)) { control = 0; }
     else if ((x == 0) && (y == 1)) { control = 1; }
@@ -139,7 +140,7 @@ void playerMove(char player) {
     }
 }
 void display() {
-    system("cls");
+    clearScreen(); // system("cls");
     std::cout << GREEN_TEXT << "+----+----+----+  " << RED_TEXT << "|" << GREEN_TEXT << "  +----+----+----+  " <<RED_TEXT << "|" << GREEN_TEXT << "  +----+----+----+" << RESET << std::endl;
     for(int i=0; i<MAX; i++) {
         for(int j=0; j<MAX; j++) {
@@ -239,9 +240,6 @@ bool finalWinner() {
         return false;
     }
     return true;
-    for(int i=1; i<=9; i++) {
-        std::cout << winGrids[i] << ", ";
-    }
     std::cout << std::endl;
     // system("pause");
 }
