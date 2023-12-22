@@ -1,3 +1,12 @@
+/*  
+ *  THE ULTIMATE TIC-TAC-TOE GAME !  
+
+ !  BUGS :
+    //->BUG 1 :  When u make an invalid move(move made on a marked square),
+    //           On your next valid move, the auto-grid switch functionality breaks (it goes to the 1st grid by default)....
+
+*/
+
 #include <iostream>
 #include <vector>
 #include <conio.h>
@@ -10,8 +19,8 @@
 #define MAX_outer 9
 #define MAX_inner 3
 
-int x = 0;
-int y = 0;
+static int x = 0;
+static int y = 0;
 static int X_Min = 0;
 static int Y_Min = 0;
 static int X_Max = 3;
@@ -61,7 +70,6 @@ int getGridNumber(int curr_x, int curr_y) {
 }
 
 void switchGrid(int i_x, int i_y) {
-    // std::cout << "HERE\t";
     int gridNo = getGridNumber(i_x, i_y);
     if (gridNo >= 1 && gridNo <= 9) {
         int row = (gridNo - 1) / 3;
@@ -104,7 +112,7 @@ void display() {
     std::cout << "ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ" << std::endl;
 }
 void place(char player) {
-    tabEnable = false; // to disable the 'tab' functionality, after player plays his first move....
+    tabEnable = false; // to disable the 'tab' functionality, after player makes his first move....
 
     if(player == 'X') {
         if(grid[y][x] == ' ') { // (y,x) since, arrow keys (x,y) == grid (y,x).
@@ -113,6 +121,7 @@ void place(char player) {
             // placing on the display grid....
             util::gotoXY(util::getXCoordinates(x), util::getYCoordinates(y)); // goto coordinate position (x,y),
             std::cout << "X"; // place character.
+            switchGrid(x, y);
         } else { 
             []() {
                 util::gotoXY(50, 4);
@@ -130,6 +139,7 @@ void place(char player) {
             // placing on the display grid....
             util::gotoXY(util::getXCoordinates(x), util::getYCoordinates(y)); // goto coordinate position (x,y),
             std::cout << "O"; // place character.
+            switchGrid(x, y);
         } else { 
             []() {
                 util::gotoXY(50, 4);
@@ -147,7 +157,7 @@ void move(char key) {
     if(key == 72 && y > Y_Min) { y--; } // Up arrow key...
     else if(key == 80 && y < Y_Max-1) { y++; } // Down arrow key...
     else if(key == 75 && x > X_Min) { x--; } // Left arrow key...
-    else if(key == 77 && x <X_Max-1) { x++; } // Right arrow key...
+    else if(key == 77 && x < X_Max-1) { x++; } // Right arrow key...
 }
 
 void playerMove(char player) { 
@@ -182,13 +192,11 @@ void playerMove(char player) {
         else if (key == 13) {  // enter key, to make a move....
             if(player == 'X') { 
                 place('X');
-                switchGrid(x, y); // to automatically switch tables based on the move made by player....
                 break; // after player makes a move, exit the while loop....
             }
             else { 
                 place('O');
-                switchGrid(x, y);
-                break; // after player makes a move, exit the while loop....
+                break;
             }
         }
         util::gotoXY(util::getXCoordinates(x), util::getYCoordinates(y)); // to indicate current position....        
