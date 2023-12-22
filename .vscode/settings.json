@@ -1,7 +1,5 @@
 {
     "files.associations": {
-        "iostream": "cpp",
-        "algorithm": "cpp",
         "array": "cpp",
         "atomic": "cpp",
         "*.tcc": "cpp",
@@ -13,6 +11,7 @@
         "cstdint": "cpp",
         "cstdio": "cpp",
         "cstdlib": "cpp",
+        "cstring": "cpp",
         "ctime": "cpp",
         "cwchar": "cpp",
         "cwctype": "cpp",
@@ -20,6 +19,7 @@
         "unordered_map": "cpp",
         "vector": "cpp",
         "exception": "cpp",
+        "algorithm": "cpp",
         "functional": "cpp",
         "iterator": "cpp",
         "memory": "cpp",
@@ -35,6 +35,7 @@
         "initializer_list": "cpp",
         "iomanip": "cpp",
         "iosfwd": "cpp",
+        "iostream": "cpp",
         "istream": "cpp",
         "limits": "cpp",
         "new": "cpp",
