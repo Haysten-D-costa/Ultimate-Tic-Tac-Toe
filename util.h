@@ -1,7 +1,7 @@
 namespace util { /* Utility namespace */
 
     int getXCoordinates(int index) {
-        return 4 * index + (2 + 4 * int(index / 3)) + 1;
+        return 4 * index + (2 + 4 * int(index / 3)) + 4;
     }
     int getYCoordinates(int index) {
         return (2 * (index + 1) + (2 * int(index / 3))) + 2;

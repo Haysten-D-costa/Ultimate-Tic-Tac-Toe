@@ -1,10 +1,4 @@
-/*  
- *  THE ULTIMATE TIC-TAC-TOE GAME !  
-
- !  BUGS :
-    //->BUG 1 :  When u make an invalid move(move made on a marked square),
-    //           On your next valid move, the auto-grid switch functionality breaks (it goes to the 1st grid by default)....
-*/
+// *  THE ULTIMATE TIC-TAC-TOE GAME !  
 
 #include <vector>
 #include <conio.h>
@@ -43,9 +37,9 @@ void display();
 void move(char key);
 void place(char player);
 void playerMove(char player);
-void displayMsg(std::string msg);
 void switchGrid(int i_x, int i_y);
 int getGridNumber(int curr_x, int curr_y);
+void displayMsg(int x, int y, std::string msg, const char* color);
 
 std::vector<std::vector<char>> extractSubMatrix(std::vector<std::vector<char>>& mainMatrix, int startRow, int startCol) {
     std::vector<std::vector<char>> subMatrix(3, std::vector<char>(3, ' '));
@@ -62,7 +56,7 @@ bool checkWin() {
         for(int j=0; j<9; j+=3) {
             std::vector<std::vector<char>> subMatrix = extractSubMatrix(grid, i, j);
 
-            // Process the 3x3 submatrix (for demonstration, just printing it)
+            // Process the 3x3 submatrix (for demonstration, just printing it)....
             std::cout << "Submatrix at (" << i << ", " << j << "):\n";
             for (auto& row : subMatrix) {
                 for (char cell : row) {
@@ -98,6 +92,10 @@ int getGridNumber(int curr_x, int curr_y) {
 
 void switchGrid(int i_x, int i_y) {
     int gridNo = getGridNumber(i_x, i_y);
+    // add a condition....if status is true (already visited), then dont call getGridNumber, directly get coordinates from status....
+    // if(status[gridNo].first.second) { // means, grid already won....
+    //     gridNo = getGridNumber(status[gridNo].first.first.first, status[gridNo].first.first.second);
+    // }
     if (gridNo >= 1 && gridNo <= 9) {
         int row = (gridNo - 1) / 3;
         int col = (gridNo - 1) % 3;
@@ -110,38 +108,40 @@ void switchGrid(int i_x, int i_y) {
     }
 }
 
-void displayMsg(std::string msg) {
-    util::gotoXY(50, 4);
-    std::cout << msg;
+void displayMsg(int x, int y, std::string msg, const char* color) {
+    util::gotoXY(x, y);
+    std::cout << color << msg << RESET;
     sleep(2);
-    util::clearXY(50, 4, msg.length());
+    util::clearXY(x, y, msg.length());
 }
 void display() {
     system("cls");
-    std::cout << CYAN_TEXT << "            'ULTIMATE' TIC-TAC-TOE" << RESET << std::endl << std::endl;
-    std::cout << "ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿" << std::endl;
-    std::cout << "³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³" << std::endl;
-    std::cout << "ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´" << std::endl;
-    std::cout << "³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³" << std::endl;
-    std::cout << "ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´" << std::endl;
-    std::cout << "³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³" << std::endl;
-    std::cout << "ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ" << std::endl;
-    std::cout << "ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÎÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÎÍÍÍÍÍÍÍÍÍÍÍÍÍÍ" << std::endl;
-    std::cout << "ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿" << std::endl;
-    std::cout << "³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³" << std::endl;
-    std::cout << "ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´" << std::endl;
-    std::cout << "³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³" << std::endl;
-    std::cout << "ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´" << std::endl;
-    std::cout << "³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³" << std::endl;
-    std::cout << "ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ" << std::endl;
-    std::cout << "ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÎÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÎÍÍÍÍÍÍÍÍÍÍÍÍÍÍ" << std::endl;
-    std::cout << "ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿" << std::endl;
-    std::cout << "³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³" << std::endl;
-    std::cout << "ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´" << std::endl;
-    std::cout << "³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³" << std::endl;
-    std::cout << "ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´" << std::endl;
-    std::cout << "³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³" << std::endl;
-    std::cout << "ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ" << std::endl;
+    std::cout << CYAN_TEXT << "              'ULTIMATE' TIC-TAC-TOE" << RESET << std::endl;
+    std::cout << "ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿  ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿" << std::endl;
+    std::cout << "³  ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿  ³  ³ GAME STATISTICS :                                ³" << std::endl;
+    std::cout << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³                                                  ³" << std::endl;
+    std::cout << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³                                                  ³" << std::endl;
+    std::cout << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³     PLAYER 1  :                                  ³" << std::endl;
+    std::cout << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³     Name   :                                     ³" << std::endl;
+    std::cout << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³     Symbol : X                                   ³" << std::endl;
+    std::cout << "³  ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ  ³  ³                                                  ³" << std::endl;
+    std::cout << "³  ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÎÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÎÍÍÍÍÍÍÍÍÍÍÍÍÍÍ  ³  ³     PLAYER 2  :                                  ³" << std::endl;
+    std::cout << "³  ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿  ³  ³     Name   :                                     ³" << std::endl;
+    std::cout << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³     Symbol : O                                   ³" << std::endl;
+    std::cout << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³                                                  ³" << std::endl;   
+    std::cout << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³     ERROR :                                      ³" << std::endl;
+    std::cout << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³                                                  ³" << std::endl;
+    std::cout << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³                                                  ³" << std::endl;
+    std::cout << "³  ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ  ³  ³                                                  ³" << std::endl;
+    std::cout << "³  ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÎÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÎÍÍÍÍÍÍÍÍÍÍÍÍÍÍ  ³  ³                                                  ³" << std::endl;
+    std::cout << "³  ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿  ³  ³                                                  ³" << std::endl;
+    std::cout << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³                                                  ³" << std::endl;
+    std::cout << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³                                                  ³" << std::endl;
+    std::cout << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³                                                  ³" << std::endl;
+    std::cout << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³                                                  ³" << std::endl;
+    std::cout << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³                                                  ³" << std::endl;
+    std::cout << "³  ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ  ³  ³                                                  ³" << std::endl; 
+    std::cout << "ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ  ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ" << std::endl;  
 }
 void place(char player) {
     tabEnable = false; // to disable the 'tab' functionality, after player makes his first move....
@@ -155,8 +155,8 @@ void place(char player) {
             std::cout << "X"; // place character.
             switchGrid(x, y);
         } else { 
-            msg = "ERROR : Invalid move ! Try again....";
-            displayMsg(msg);
+            msg = "Invalid move ! Try again....";
+            displayMsg(68, 14, msg, RED_TEXT);
             playerMove('X'); // allow player to play correct move again...
         }
     } else { 
@@ -168,8 +168,8 @@ void place(char player) {
             std::cout << "O"; // place character.
             switchGrid(x, y);
         } else { 
-            msg = "ERROR : Invalid move ! Try again....";
-            displayMsg(msg);
+            msg = "Invalid move ! Try again....";
+            displayMsg(68, 14, msg, RED_TEXT);
             playerMove('O');
         }
     }
@@ -195,14 +195,15 @@ void playerMove(char player) {
     while(true) {
         key = _getch();
         if (key == 27) { // escape key, to exit....
-            msg = "CAUTION : Current Progress will be lost...."; displayMsg(msg);
-            util::gotoXY(50, 4);
-            msg = "Do you wish to continue ? "; std::cout << msg;
+            msg = "Current Progress will be lost...."; displayMsg(68, 14, msg, RED_TEXT);
+            util::gotoXY(68, 14);
+            msg = "Do you wish to continue ? "; std::cout << RED_TEXT << msg << GREEN_TEXT;
             char confirm;
-            std::cin >> confirm; 
-            util::clearXY(50, 4, msg.length() + 40);
+            std::cin >> confirm;
+            std::cout << RESET; 
+            util::clearXY(68, 14, msg.length() + 11);
             if(confirm == 'Y' || confirm == 'y') { 
-                displayMsg("Exiting !....");
+                displayMsg(68, 14, "Exiting !....", RED_TEXT);
                 system("cls");
                 exit(1);
             } else {
@@ -213,8 +214,8 @@ void playerMove(char player) {
             if(tabEnable) {
                 generateCoordinatesTab();
             } else {
-                msg = "ERROR : Cannot switch grids after move....";
-                displayMsg(msg);
+                msg = "Cannot switch grids after move....";
+                displayMsg(68, 14, msg, RED_TEXT);
             }
         }
         else if ((key == 72) || (key == 80) || (key == 75) || (key == 77)) {  // arrow keys....
@@ -230,23 +231,45 @@ void playerMove(char player) {
                 break;
             }
         }
-        util::gotoXY(util::getXCoordinates(x), util::getYCoordinates(y)); // to indicate current position....        
+        char highlight = 219;
+        util::gotoXY(util::getXCoordinates(x), util::getYCoordinates(y)); // to indicate current position....
     }
+}
+void initPlayers() {
+    std::string player_1;
+    std::string player_2;
+
+    display();
+    util::gotoXY(60, 17);
+    std::cout << CYAN_TEXT << "Enter Player 1 name : " << RESET; 
+    getline(std::cin, player_1);
+    util::gotoXY(69, 7);
+    std::cout << player_1;
+    util::clearXY(82, 17, player_1.length());
+    
+    util::gotoXY(60, 17);
+    std::cout << CYAN_TEXT << "Enter Player 2 name : " << RESET; getline(std::cin, player_2);
+    util::gotoXY(69, 11);
+    std::cout << player_2;
+    util::gotoXY(60, 17);
+    util::clearXY(60, 17, (22+player_2.length()));
+    displayMsg(69, 17, "***** GAME BEGINS *****", CYAN_TEXT);
 }
 
 int main() {
-    display();
+    
+    initPlayers();
     while(true) {
-        playerMove('X');
-        playerMove('O');
-        playerMove('X');
-        playerMove('O');
-        playerMove('X');
-        playerMove('O');
-        playerMove('X');
-        playerMove('O');
-        system("pause");
-        util::gotoXY(0,28);
+        util::gotoXY(58, 10); std::cout << "  ";util::gotoXY(58, 6); std::cout << GREEN_TEXT << "> " << RESET; playerMove('X');
+        util::gotoXY(58, 6); std::cout << "  ";util::gotoXY(58, 10); std::cout << GREEN_TEXT << "> " << RESET; playerMove('O');
+        // playerMove('X');
+        // playerMove('O');
+        // playerMove('X');
+        // playerMove('O');
+        // playerMove('X');
+        // playerMove('O');
+        // system("pause");
+        // util::gotoXY(0,28);
         // for(int i=0; i<MAX_outer; i++) { // just to check the i/p to array(inverted)....
         //     for(int j=0; j<MAX_outer; j++) {
         //         std::cout << " | " << grid[i][j];
@@ -254,7 +277,7 @@ int main() {
         //     std::cout << std::endl;
         // }
         // system("pause");
-        checkWin();
+        // checkWin();
     }
     return 0;
 }
