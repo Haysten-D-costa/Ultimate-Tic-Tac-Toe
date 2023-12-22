@@ -4,16 +4,13 @@
  !  BUGS :
     //->BUG 1 :  When u make an invalid move(move made on a marked square),
     //           On your next valid move, the auto-grid switch functionality breaks (it goes to the 1st grid by default)....
-
 */
 
-#include <iostream>
 #include <vector>
 #include <conio.h>
 #include <unistd.h>
-#include <stdexcept>
+#include <iostream>
 #include <algorithm>
-
 #include "textstyling.h"
 #include "util.h"
 #define MAX_outer 9
@@ -25,9 +22,10 @@ static int X_Min = 0;
 static int Y_Min = 0;
 static int X_Max = 3;
 static int Y_Max = 3;
+std::string msg = "";
 
 bool tabEnable = true;
-char grid[MAX_outer][MAX_outer] = {
+std::vector<std::vector<char>> grid = {
     {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
     {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
     {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
@@ -38,14 +36,43 @@ char grid[MAX_outer][MAX_outer] = {
     {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
     {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
 };
-std::vector <std::pair<std::pair <int, int>, bool>> status;
+//? status(((x-coordinate, y-coordinate), won), who ) : 
+std::vector <std::pair<std::pair<std::pair<int, int>, bool>, char>> status;
 
 void display();
 void move(char key);
 void place(char player);
 void playerMove(char player);
+void displayMsg(std::string msg);
 void switchGrid(int i_x, int i_y);
 int getGridNumber(int curr_x, int curr_y);
+
+std::vector<std::vector<char>> extractSubMatrix(std::vector<std::vector<char>>& mainMatrix, int startRow, int startCol) {
+    std::vector<std::vector<char>> subMatrix(3, std::vector<char>(3, ' '));
+    for (int i=0; i<3; i++) {
+        for (int j=0; j<3; j++) {
+            subMatrix[i][j] = mainMatrix[startRow + i][startCol + j];
+        }
+    }
+    return subMatrix;
+}
+
+bool checkWin() {
+    for(int i=0; i<9; i+=3) {
+        for(int j=0; j<9; j+=3) {
+            std::vector<std::vector<char>> subMatrix = extractSubMatrix(grid, i, j);
+
+            // Process the 3x3 submatrix (for demonstration, just printing it)
+            std::cout << "Submatrix at (" << i << ", " << j << "):\n";
+            for (auto& row : subMatrix) {
+                for (char cell : row) {
+                    std::cout << cell << ' ';
+                }
+                std::cout << '\n';
+            }
+        }
+    }
+}
 
 int getGridNumber(int curr_x, int curr_y) {
     std::vector<std::vector<std::pair<int, int>>> grids = {
@@ -83,10 +110,15 @@ void switchGrid(int i_x, int i_y) {
     }
 }
 
+void displayMsg(std::string msg) {
+    util::gotoXY(50, 4);
+    std::cout << msg;
+    sleep(2);
+    util::clearXY(50, 4, msg.length());
+}
 void display() {
     system("cls");
     std::cout << CYAN_TEXT << "            'ULTIMATE' TIC-TAC-TOE" << RESET << std::endl << std::endl;
-    // std::cout << "ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ" << std::endl;
     std::cout << "ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿" << std::endl;
     std::cout << "³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³" << std::endl;
     std::cout << "ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´" << std::endl;
@@ -123,13 +155,8 @@ void place(char player) {
             std::cout << "X"; // place character.
             switchGrid(x, y);
         } else { 
-            []() {
-                util::gotoXY(50, 4);
-                std::string ERROR = "ERROR : Invalid move ! Try again....";
-                std::cout << ERROR;
-                sleep(2);
-                util::clearAtXY(50, 4, ERROR.length());
-            }();
+            msg = "ERROR : Invalid move ! Try again....";
+            displayMsg(msg);
             playerMove('X'); // allow player to play correct move again...
         }
     } else { 
@@ -141,13 +168,8 @@ void place(char player) {
             std::cout << "O"; // place character.
             switchGrid(x, y);
         } else { 
-            []() {
-                util::gotoXY(50, 4);
-                std::string ERROR = "ERROR : Invalid move ! Try again....";
-                std::cout << ERROR;
-                sleep(2);
-                util::clearAtXY(50, 4, ERROR.length());
-            }();
+            msg = "ERROR : Invalid move ! Try again....";
+            displayMsg(msg);
             playerMove('O');
         }
     }
@@ -160,7 +182,7 @@ void move(char key) {
     else if(key == 77 && x < X_Max-1) { x++; } // Right arrow key...
 }
 
-void playerMove(char player) { 
+void playerMove(char player) {
     int key;
     util::gotoXY(util::getXCoordinates(x), util::getYCoordinates(y)); // to indicate current position....
 
@@ -172,21 +194,30 @@ void playerMove(char player) {
     };
     while(true) {
         key = _getch();
-        if (key == 27) { system("cls"); exit(1); } // escape key, to exit....//=> Escape logic here.
+        if (key == 27) { // escape key, to exit....
+            msg = "CAUTION : Current Progress will be lost...."; displayMsg(msg);
+            util::gotoXY(50, 4);
+            msg = "Do you wish to continue ? "; std::cout << msg;
+            char confirm;
+            std::cin >> confirm; 
+            util::clearXY(50, 4, msg.length() + 40);
+            if(confirm == 'Y' || confirm == 'y') { 
+                displayMsg("Exiting !....");
+                system("cls");
+                exit(1);
+            } else {
+                // continue the game....
+            }
+        }
         else if(key == 9) { // tab key, to change tables....
             if(tabEnable) {
                 generateCoordinatesTab();
             } else {
-                []() {
-                    util::gotoXY(50, 4);
-                    std::string ERROR = "ERROR : Cannot switch grids after move....";
-                    std::cout << ERROR;
-                    sleep(2);
-                    util::clearAtXY(50, 4, ERROR.length());
-                }();
+                msg = "ERROR : Cannot switch grids after move....";
+                displayMsg(msg);
             }
         }
-        else if ((key == 72) || (key == 80) || (key == 75) || (key == 77)) { 
+        else if ((key == 72) || (key == 80) || (key == 75) || (key == 77)) {  // arrow keys....
             move(key); 
         }
         else if (key == 13) {  // enter key, to make a move....
@@ -208,14 +239,14 @@ int main() {
     while(true) {
         playerMove('X');
         playerMove('O');
-        // playerMove('X');
-        // playerMove('O');
-        // playerMove('X');
-        // playerMove('O');
-        // playerMove('X');
-        // playerMove('O');
-        // system("pause");
-        // util::gotoXY(0,28);
+        playerMove('X');
+        playerMove('O');
+        playerMove('X');
+        playerMove('O');
+        playerMove('X');
+        playerMove('O');
+        system("pause");
+        util::gotoXY(0,28);
         // for(int i=0; i<MAX_outer; i++) { // just to check the i/p to array(inverted)....
         //     for(int j=0; j<MAX_outer; j++) {
         //         std::cout << " | " << grid[i][j];
@@ -223,7 +254,7 @@ int main() {
         //     std::cout << std::endl;
         // }
         // system("pause");
+        checkWin();
     }
-    
     return 0;
 }

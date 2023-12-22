@@ -1,6 +1,5 @@
-#include <iostream>
+namespace util { /* Utility namespace */
 
-namespace util {
     int getXCoordinates(int index) {
         return 4 * index + (2 + 4 * int(index / 3)) + 1;
     }
@@ -10,7 +9,7 @@ namespace util {
     void gotoXY(int x, int y) {
         printf("%c[%d;%df", 0x1B, y, x);
     }
-    void clearAtXY(int x, int y, int length) {
+    void clearXY(int x, int y, int length) {
         gotoXY(x, y);
         for(int i=0; i<length; i++) {
             printf(" ");
