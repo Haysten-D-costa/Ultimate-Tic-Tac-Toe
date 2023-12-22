@@ -35,7 +35,7 @@ void display();
 void move(char key);
 void place(char player);
 void playerMove(char player);
-void switchTable(int i_x, int i_y);
+void switchGrid(int i_x, int i_y);
 int getGridNumber(int curr_x, int curr_y);
 
 int getGridNumber(int curr_x, int curr_y) {
@@ -51,7 +51,7 @@ int getGridNumber(int curr_x, int curr_y) {
         {{2,2},{5,2},{8,2},{2,5},{5,5},{8,5},{2,8},{5,8},{8,8}}
     };
     std::vector<std::pair<int, int>> currCoordinates = {{curr_x, curr_y}};
-    for (int i = 0; i < 9; ++i) {
+    for (int i=0; i<9; i++) {
         const auto& grid = grids[i];
         if (std::find(grid.begin(), grid.end(), currCoordinates[0]) != grid.end()) {
             return i + 1;
@@ -60,7 +60,8 @@ int getGridNumber(int curr_x, int curr_y) {
     return -1;
 }
 
-void switchTable(int i_x, int i_y) {
+void switchGrid(int i_x, int i_y) {
+    // std::cout << "HERE\t";
     int gridNo = getGridNumber(i_x, i_y);
     if (gridNo >= 1 && gridNo <= 9) {
         int row = (gridNo - 1) / 3;
@@ -113,8 +114,13 @@ void place(char player) {
             util::gotoXY(util::getXCoordinates(x), util::getYCoordinates(y)); // goto coordinate position (x,y),
             std::cout << "X"; // place character.
         } else { 
-            util::gotoXY(50, 4); // goto coordinate position (x,y),
-            std::cout << "ERROR : Invalid move ! Try again...."; 
+            []() {
+                util::gotoXY(50, 4);
+                std::string ERROR = "ERROR : Invalid move ! Try again....";
+                std::cout << ERROR;
+                sleep(2);
+                util::clearAtXY(50, 4, ERROR.length());
+            }();
             playerMove('X'); // allow player to play correct move again...
         }
     } else { 
@@ -125,8 +131,13 @@ void place(char player) {
             util::gotoXY(util::getXCoordinates(x), util::getYCoordinates(y)); // goto coordinate position (x,y),
             std::cout << "O"; // place character.
         } else { 
-            util::gotoXY(50, 4); // goto coordinate position (x,y),
-            std::cout << "ERROR : Invalid move ! Try again...."; 
+            []() {
+                util::gotoXY(50, 4);
+                std::string ERROR = "ERROR : Invalid move ! Try again....";
+                std::cout << ERROR;
+                sleep(2);
+                util::clearAtXY(50, 4, ERROR.length());
+            }();
             playerMove('O');
         }
     }
@@ -142,22 +153,41 @@ void move(char key) {
 void playerMove(char player) { 
     int key;
     util::gotoXY(util::getXCoordinates(x), util::getYCoordinates(y)); // to indicate current position....
+
+    auto generateCoordinatesTab = [&]() { // lambda function to generate coordinates on tab clicks....
+        static int tabCounter = 1;
+        const int coordinates[][2] = { {0,0},{1,0},{2,0},{0,1},{1,1},{2,1},{0,2},{1,2},{2,2} };
+        switchGrid(coordinates[tabCounter][0], coordinates[tabCounter][1]);
+        tabCounter = (tabCounter + 1) % 9;
+    };
     while(true) {
         key = _getch();
         if (key == 27) { system("cls"); exit(1); } // escape key, to exit....//=> Escape logic here.
         else if(key == 9) { // tab key, to change tables....
-            // switchTable();
+            if(tabEnable) {
+                generateCoordinatesTab();
+            } else {
+                []() {
+                    util::gotoXY(50, 4);
+                    std::string ERROR = "ERROR : Cannot switch grids after move....";
+                    std::cout << ERROR;
+                    sleep(2);
+                    util::clearAtXY(50, 4, ERROR.length());
+                }();
+            }
         }
-        else if ((key == 72) || (key == 80) || (key == 75) || (key == 77)) { move(key); }
+        else if ((key == 72) || (key == 80) || (key == 75) || (key == 77)) { 
+            move(key); 
+        }
         else if (key == 13) {  // enter key, to make a move....
             if(player == 'X') { 
                 place('X');
-                switchTable(x, y);
+                switchGrid(x, y); // to automatically switch tables based on the move made by player....
                 break; // after player makes a move, exit the while loop....
             }
             else { 
                 place('O');
-                switchTable(x, y);
+                switchGrid(x, y);
                 break; // after player makes a move, exit the while loop....
             }
         }
@@ -170,12 +200,12 @@ int main() {
     while(true) {
         playerMove('X');
         playerMove('O');
-        playerMove('X');
-        playerMove('O');
-        playerMove('X');
-        playerMove('O');
-        playerMove('X');
-        playerMove('O');
+        // playerMove('X');
+        // playerMove('O');
+        // playerMove('X');
+        // playerMove('O');
+        // playerMove('X');
+        // playerMove('O');
         // system("pause");
         // util::gotoXY(0,28);
         // for(int i=0; i<MAX_outer; i++) { // just to check the i/p to array(inverted)....

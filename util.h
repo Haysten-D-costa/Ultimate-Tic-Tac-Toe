@@ -10,4 +10,10 @@ namespace util {
     void gotoXY(int x, int y) {
         printf("%c[%d;%df", 0x1B, y, x);
     }
+    void clearAtXY(int x, int y, int length) {
+        gotoXY(x, y);
+        for(int i=0; i<length; i++) {
+            printf(" ");
+        }
+    }
 }
