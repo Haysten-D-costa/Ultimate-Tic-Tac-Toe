@@ -66,6 +66,7 @@ bool checkWin() {
             }
         }
     }
+    // LOGIC REMAINING.....
 }
 
 int getGridNumber(int curr_x, int curr_y) {
@@ -235,7 +236,7 @@ void playerMove(char player) {
         util::gotoXY(util::getXCoordinates(x), util::getYCoordinates(y)); // to indicate current position....
     }
 }
-void initPlayers() {
+void initPlayers() { // sets the player details....
     std::string player_1;
     std::string player_2;
 
@@ -262,6 +263,9 @@ int main() {
     while(true) {
         util::gotoXY(58, 10); std::cout << "  ";util::gotoXY(58, 6); std::cout << GREEN_TEXT << "> " << RESET; playerMove('X');
         util::gotoXY(58, 6); std::cout << "  ";util::gotoXY(58, 10); std::cout << GREEN_TEXT << "> " << RESET; playerMove('O');
+        
+        //? DEBUGGING PURPOSE....
+
         // playerMove('X');
         // playerMove('O');
         // playerMove('X');
