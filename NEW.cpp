@@ -78,11 +78,9 @@ bool isInvalid(int x, int y) { // isInvalid() would mean, the grid is already wo
         const auto& keyPair = entry.first;  // Assuming the first pair is the key....
         if (keyPair.first == targetPair.first && keyPair.second == targetPair.second) {
             found = true;
-            break;
+            continue;
         }
         index++;
-        // if(status[index].second.first, status[index].second.second) { util::gotoXY(0,0); std::cout << "DEADLOCK"; } //=> IMPLEMENT LOGIC TO DEAL WITH DEADLOCKS....
-        // else { /* continue */ }
     }
     if(found) { return index; }
     else { return 0; }
@@ -90,8 +88,9 @@ bool isInvalid(int x, int y) { // isInvalid() would mean, the grid is already wo
 
 void switchGrid(int i_x, int i_y) {
 
-    int gridNo;    
-    if (int index = isInvalid(i_x, i_y)) {
+    int gridNo;
+    int index = isInvalid(i_x, i_y);
+    if (index) {
         gridNo = getGridNumber(status[index].second.first, status[index].second.second);
     } else {
         gridNo = getGridNumber(i_x, i_y);
@@ -118,30 +117,30 @@ void displayMsg(int x, int y, std::string msg, const char* color) {
 void display() { 
     system("cls");
     std::cout << CYAN_TEXT << "              'ULTIMATE' TIC-TAC-TOE" << RESET << std::endl
-          << "ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿  ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿" << std::endl
-          << "³  ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿  ³  ³ " << CYAN_BACKGROUND << "               " << RESET << CYAN_TEXT << " GAME STATISTICS " << RESET << CYAN_BACKGROUND << "               " << RESET << " ³" << std::endl
-          << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´" << std::endl
-          << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³                                                 ³" << std::endl
-          << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³     " << CYAN_TEXT << "PLAYER 1  : " << RESET << "                                ³" << std::endl
-          << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³     Name   :                                    ³" << std::endl
-          << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³     Symbol : " << RED_TEXT << "'X'"<< RESET << "                                |" << std::endl
-          << "³  ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ  ³  ³                                                 ³" << std::endl
-          << "³  ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÎÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÎÍÍÍÍÍÍÍÍÍÍÍÍÍÍ  ³  ³     " << CYAN_TEXT << "PLAYER 2  : " << RESET << "                                ³" << std::endl
-          << "³  ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿  ³  ³     Name   :                                    ³" << std::endl
-          << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³     Symbol : " << RED_TEXT << "'O'"<< RESET << "                                |" << std::endl
-          << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³                                                 ³" << std::endl
-          << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³     " << CYAN_TEXT << "ERROR : " << RESET << "                                    ³" << std::endl
-          << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³                                                 ³" << std::endl
-          << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³                                                 ³" << std::endl
-          << "³  ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ  ³  ³                                                 ³" << std::endl
-          << "³  ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÎÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÎÍÍÍÍÍÍÍÍÍÍÍÍÍÍ  ³  ³                                                 ³" << std::endl
-          << "³  ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿  ³  ³                                                 ³" << std::endl
-          << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³                                                 ³" << std::endl
-          << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³                                                 ³" << std::endl
-          << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³                                                 ³" << std::endl
-          << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³                                                 ³" << std::endl
-          << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³                                                 ³" << std::endl
-          << "³  ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ  ³  ³                                                 ³" << std::endl
+              << "ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿  ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿" << std::endl
+              << "³  ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿  ³  ³ " << CYAN_BACKGROUND << "               " << RESET << CYAN_TEXT << " GAME STATISTICS " << RESET << CYAN_BACKGROUND << "               " << RESET << " ³" << std::endl
+              << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´" << std::endl
+              << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³                                                 ³" << std::endl
+              << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³     " << CYAN_TEXT << "PLAYER 1  : " << RESET << "                                ³" << std::endl
+              << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³     Name   :                                    ³" << std::endl
+              << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³     Symbol : " << RED_TEXT << "'X'"<< RESET << "                                |" << std::endl
+              << "³  ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ  ³  ³                                                 ³" << std::endl
+              << "³  ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÎÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÎÍÍÍÍÍÍÍÍÍÍÍÍÍÍ  ³  ³     " << CYAN_TEXT << "PLAYER 2  : " << RESET << "                                ³" << std::endl
+              << "³  ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿  ³  ³     Name   :                                    ³" << std::endl
+              << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³     Symbol : " << RED_TEXT << "'O'"<< RESET << "                                |" << std::endl
+              << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³                                                 ³" << std::endl
+              << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³     " << CYAN_TEXT << "ERROR : " << RESET << "                                    ³" << std::endl
+              << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³                                                 ³" << std::endl
+              << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³                                                 ³" << std::endl
+              << "³  ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ  ³  ³                                                 ³" << std::endl
+              << "³  ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÎÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÎÍÍÍÍÍÍÍÍÍÍÍÍÍÍ  ³  ³                                                 ³" << std::endl
+              << "³  ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿  ³  ³                                                 ³" << std::endl
+              << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³                                                 ³" << std::endl
+              << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³                                                 ³" << std::endl
+              << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³                                                 ³" << std::endl
+              << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³                                                 ³" << std::endl
+              << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³                                                 ³" << std::endl
+              << "³  ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ  ³  ³                                                 ³" << std::endl
           << "ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ  ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ" << std::endl;
 }
 
@@ -154,24 +153,12 @@ std::vector<std::vector<char>> extractSubMatrix(std::vector<std::vector<char>>& 
     }
     return subMatrix;
 }
-// bool checkWinInSubMatrix(const std::vector<std::vector<char>>& subMatrix) { // function to check win in 3x3 grid(sub-grid)....
-//     // Check rows and columns for a win....
-//     for (int i = 0; i < 3; ++i) {
-//         if (subMatrix[i][0] == subMatrix[i][1] && subMatrix[i][1] == subMatrix[i][2] && subMatrix[i][0] != ' ') return true; // Row win....
-//         if (subMatrix[0][i] == subMatrix[1][i] && subMatrix[1][i] == subMatrix[2][i] && subMatrix[0][i] != ' ') return true; // Column win....
-//     }
-//     // Check diagonals for a win....
-//     if (subMatrix[0][0] == subMatrix[1][1] && subMatrix[1][1] == subMatrix[2][2] && subMatrix[0][0] != ' ') return true; // Diagonal win....
-//     if (subMatrix[0][2] == subMatrix[1][1] && subMatrix[1][1] == subMatrix[2][0] && subMatrix[0][2] != ' ') return true; // Diagonal win....
-//     return false; // No win in the submatrix....
-// }
 char checkWinInSubMatrix(const std::vector<std::vector<char>>& subMatrix) {
     // Check rows and columns for a win....
     for (int i = 0; i < 3; ++i) {
         if (subMatrix[i][0] == subMatrix[i][1] && subMatrix[i][1] == subMatrix[i][2] && subMatrix[i][0] != ' ') { return subMatrix[i][0]; } // returns winning symbol....
         if (subMatrix[0][i] == subMatrix[1][i] && subMatrix[1][i] == subMatrix[2][i] && subMatrix[0][i] != ' ') { return subMatrix[0][i]; }
     }
-
     // Check diagonals for a win....
     if (subMatrix[0][0] == subMatrix[1][1] && subMatrix[1][1] == subMatrix[2][2] && subMatrix[0][0] != ' ') { return subMatrix[0][0]; }
     if (subMatrix[0][2] == subMatrix[1][1] && subMatrix[1][1] == subMatrix[2][0] && subMatrix[0][2] != ' ') { return subMatrix[0][2]; }
@@ -186,10 +173,16 @@ char checkWinInSubMatrix(const std::vector<std::vector<char>>& subMatrix) {
             }
         }
     }
-    if (isDraw) {
-        return 'D'; // Return 'D' for draw
-    }
-    return ' '; // No win or draw
+    if (isDraw) { return 'D'; }
+    return ' '; // No win or draw....
+}
+
+void clearWonGrid() {
+    util::clearXY(util::getXCoordinates(X_Min)-1, util::getYCoordinates(Y_Min), 11);
+    util::clearXY(util::getXCoordinates(X_Min)-1, util::getYCoordinates(Y_Min+1), 11);
+    util::clearXY(util::getXCoordinates(X_Min)-1, util::getYCoordinates(Y_Min+1)-1, 11);
+    util::clearXY(util::getXCoordinates(X_Min)-1, util::getYCoordinates(Y_Min+2), 11);
+    util::clearXY(util::getXCoordinates(X_Min)-1, util::getYCoordinates(Y_Min+2)-1, 11);
 }
 
 
@@ -209,6 +202,7 @@ void place(char player) {
                 for (const auto& coordinate : goto_coordinates_grid[gNo-1]) {
                     status.emplace_back(std::make_pair(std::make_pair(coordinate.first, coordinate.second), std::make_pair(x, y)));
                 }
+                clearWonGrid();
             }
             
             // placing on the display grid....
@@ -228,9 +222,11 @@ void place(char player) {
                 int row = (gNo - 1) / 3;
                 int col = (gNo - 1) % 3;
                 finalWin[row][col] = 'O'; // updates the finalWin matrix....
+                
                 for (const auto& coordinate : goto_coordinates_grid[gNo-1]) {
                     status.emplace_back(std::make_pair(std::make_pair(coordinate.first, coordinate.second), std::make_pair(x, y)));
                 }
+                clearWonGrid();
             }
 
             // placing on the display grid....
@@ -261,6 +257,11 @@ void playerMove(char player) {
         switchGrid(coordinates[tabCounter][0], coordinates[tabCounter][1]);
         tabCounter = (tabCounter + 1) % 9;
     };
+    /*
+        if((x,y) == (already won grid)) {
+            then enable the tab functionality.....since grid invalid....
+        }
+    */
     while(true) {
         key = _getch();
         if (key == 27) { // escape key, to exit....
@@ -309,39 +310,59 @@ void initPlayers() { // sets the player details....
     std::string player_2;
 
     display();
-    // util::gotoXY(60, 17);
-    // std::cout << GREEN_TEXT << "Enter Player 1 name : " << RESET; 
-    // getline(std::cin, player_1);
-    // util::gotoXY(69, 7);
-    // std::cout << player_1;
-    // util::clearXY(82, 17, player_1.length());
+    util::gotoXY(60, 17);
+    std::cout << GREEN_TEXT << "Enter Player 1 name : " << RESET; 
+    getline(std::cin, player_1);
+    util::gotoXY(69, 7);
+    std::cout << player_1;
+    util::clearXY(82, 17, player_1.length());
     
-    // util::gotoXY(60, 17);
-    // std::cout << GREEN_TEXT << "Enter Player 2 name : " << RESET; getline(std::cin, player_2);
-    // util::gotoXY(69, 11);
-    // std::cout << player_2;
-    // util::gotoXY(60, 17);
-    // util::clearXY(60, 17, (22+player_2.length()));
-    // displayMsg(69, 17, "***** GAME BEGINS *****", RED_TEXT);
+    util::gotoXY(60, 17);
+    std::cout << GREEN_TEXT << "Enter Player 2 name : " << RESET; getline(std::cin, player_2);
+    util::gotoXY(69, 11);
+    std::cout << player_2;
+    util::gotoXY(60, 17);
+    util::clearXY(60, 17, (22+player_2.length()));
+    displayMsg(69, 17, "***** GAME BEGINS *****", RED_TEXT);
 }
 
 int main() {
     
+    char result;
     initPlayers();
     while(true) {
-        util::gotoXY(58, 10); std::cout << "  "; util::gotoXY(58, 6); std::cout << GREEN_TEXT << "> " << RESET; playerMove('X');
-        util::gotoXY(58, 6); std::cout << "  "; util::gotoXY(58, 10); std::cout << GREEN_TEXT << "> " << RESET; playerMove('O');
-        
-        char result = checkWinInSubMatrix(finalWin);
+        util::gotoXY(58, 10); std::cout<< "  "; util::gotoXY(58, 6); std::cout << GREEN_TEXT << "> " << RESET; playerMove('X');
+        result = checkWinInSubMatrix(finalWin);
         if(result == 'D') { 
-            util::gotoXY(0, 0); 
-            std::cout << "ITS A DRAW !"; system("pause"); exit(1);
+            util::gotoXY(70, 20); 
+            std::cout << "ITS A DRAW !";
+            exit(1);
         } else if(result == 'X') {
-            util::gotoXY(0, 0); 
-            std::cout << "'X' WINS !"; system("pause"); exit(1);
+            util::gotoXY(70, 20); 
+            std::cout << "'X' WINS !";
+            exit(1);
         } else if(result == 'O') {
-            util::gotoXY(0, 0); 
-            std::cout << "'O' WINS !"; system("pause"); exit(1);
+            util::gotoXY(70, 20); 
+            std::cout << "'O' WINS !";
+            exit(1);
+        } else {
+            // do nothing....
+        }
+
+        util::gotoXY(58, 6); std::cout << "  "; util::gotoXY(58, 10); std::cout << GREEN_TEXT << "> " << RESET; playerMove('O');
+        result = checkWinInSubMatrix(finalWin);
+        if(result == 'D') { 
+            util::gotoXY(70, 20); 
+            std::cout << "ITS A DRAW !";
+            exit(1);
+        } else if(result == 'X') {
+            util::gotoXY(70, 20); 
+            std::cout << "'X' WINS !";
+            exit(1);
+        } else if(result == 'O') {
+            util::gotoXY(70, 20); 
+            std::cout << "'O' WINS !";
+            exit(1);
         } else {
             // do nothing....
         }
