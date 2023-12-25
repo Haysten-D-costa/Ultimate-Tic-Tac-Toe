@@ -42,7 +42,7 @@ std::vector<std::vector<std::pair<int, int>>> goto_coordinates_grid = {
     {{2,2},{5,2},{8,2},{2,5},{5,5},{8,5},{2,8},{5,8},{8,8}}
 };
 std::vector<std::vector<char>> finalWin = {{' ',' ',' '},{' ',' ',' '},{' ',' ',' '}};
-std::vector<std::pair<std::pair<int, int>, std::pair<int, int>>> status = {};
+std::vector<std::pair<std::pair<int, int>, std::pair<int, int>>> status;
 
 void display();
 void move(char key);
@@ -52,7 +52,7 @@ void switchGrid(int i_x, int i_y);
 int getGridNumber(int curr_x, int curr_y);
 void displayMsg(int x, int y, std::string msg, const char* color);
 
-int getSubgridNumber(int i, int j) {
+int getSubgridNumber(int i, int j) { // returns 1, 2, 3, 4, 5, 6, 7, 8 or 9....
     int subgridRow = j / 3;
     int subgridCol = i / 3;
     int subgridNumber = subgridRow * 3 + subgridCol + 1;
@@ -69,13 +69,11 @@ int getGridNumber(int curr_x, int curr_y) {
     }
     return -1;
 }
-
-void switchGrid(int i_x, int i_y) {
-    
-    int gridNo; //? getGridNumber() - // gets the grid to be played in next, for the move made....
-    int index = 0;
+bool isInvalid(int x, int y) { // isInvalid() would mean, the grid is already won, hence invalid....
     bool found = false;
-    std::pair<int, int> targetPair = {i_x, i_y};
+    std::pair<int, int> targetPair = {x, y};
+    int index = 0;
+    
     for (const auto& entry : status) {
         const auto& keyPair = entry.first;  // Assuming the first pair is the key....
         if (keyPair.first == targetPair.first && keyPair.second == targetPair.second) {
@@ -83,13 +81,21 @@ void switchGrid(int i_x, int i_y) {
             break;
         }
         index++;
+        // if(status[index].second.first, status[index].second.second) { util::gotoXY(0,0); std::cout << "DEADLOCK"; } //=> IMPLEMENT LOGIC TO DEAL WITH DEADLOCKS....
+        // else { /* continue */ }
     }
-    if (found) {
+    if(found) { return index; }
+    else { return 0; }
+}
+
+void switchGrid(int i_x, int i_y) {
+
+    int gridNo;    
+    if (int index = isInvalid(i_x, i_y)) {
         gridNo = getGridNumber(status[index].second.first, status[index].second.second);
     } else {
         gridNo = getGridNumber(i_x, i_y);
     }
-    // gridNo = getGridNumber(i_x, i_y);
     if (gridNo >= 1 && gridNo <= 9) {
         int row = (gridNo - 1) / 3;
         int col = (gridNo - 1) % 3;
@@ -157,30 +163,24 @@ bool checkWinInSubMatrix(const std::vector<std::vector<char>>& subMatrix) { // f
     // Check diagonals for a win....
     if (subMatrix[0][0] == subMatrix[1][1] && subMatrix[1][1] == subMatrix[2][2] && subMatrix[0][0] != ' ') return true; // Diagonal win....
     if (subMatrix[0][2] == subMatrix[1][1] && subMatrix[1][1] == subMatrix[2][0] && subMatrix[0][2] != ' ') return true; // Diagonal win....
-    return false; // No win in the submatrix
+    return false; // No win in the submatrix....
 }
 
 void place(char player) {
-    tabEnable = false; // to disable the 'tab' functionality, after player makes his first move....
+   tabEnable = false; // to disable the 'tab' functionality, after player makes his first move....
 
     if(player == 'X') {
         if(grid[y][x] == ' ') { // (y,x) since, arrow keys (x,y) == grid (y,x).
             grid[y][x] = 'X';
 
             if(checkWinInSubMatrix(extractSubMatrix(grid, Y_Min, X_Min))) {
-                displayMsg(0,35,"X - WIN",YELLOW_TEXT);
                 int gNo = getSubgridNumber(x, y);
-                finalWin[gNo-1] = {'X'};
-                // util::gotoXY(0, 35);
-                // std::cout << x << y << gNo;
-                // system("pause");
-                // std::pair<int, int> valuePair = {X_Min, Y_Min};
+                int row = (gNo - 1) / 3;
+                int col = (gNo - 1) % 3;
+                finalWin[row][col] = 'X'; // updates the finalWin matrix....
+                
                 for (const auto& coordinate : goto_coordinates_grid[gNo-1]) {
-                    // std::pair<int, int> keyPair = {coordinate.first, coordinate.second};
                     status.emplace_back(std::make_pair(std::make_pair(coordinate.first, coordinate.second), std::make_pair(x, y)));
-                    // status.emplace_back(keyPair,valuePair,X_Min, Y_Min);
-                    util::gotoXY(0, 34);
-                    // std::cout << "(" << coordinate.first << ", " << coordinate.second << ") ";
                 }
             }
             
@@ -197,24 +197,13 @@ void place(char player) {
             grid[y][x] = 'O'; 
 
             if(checkWinInSubMatrix(extractSubMatrix(grid, Y_Min, X_Min))) {
-                displayMsg(0,35,"Y - WIN",YELLOW_TEXT);
                 int gNo = getSubgridNumber(x, y);
-                finalWin[gNo-1] = {'O'};
-                // util::gotoXY(0, 35);
-                // std::cout << x << y << gNo;
-                // system("pause");
+                int row = (gNo - 1) / 3;
+                int col = (gNo - 1) % 3;
+                finalWin[row][col] = 'O'; // updates the finalWin matrix....
                 for (const auto& coordinate : goto_coordinates_grid[gNo-1]) {
-                    // std::pair<int, int> keyPair = {coordinate.first, coordinate.second};
                     status.emplace_back(std::make_pair(std::make_pair(coordinate.first, coordinate.second), std::make_pair(x, y)));
-                    // status.emplace_back(keyPair,valuePair,X_Min, Y_Min);
-                    util::gotoXY(0, 34);
-                    // std::cout << "(" << coordinate.first << ", " << coordinate.second << ") ";
                 }
-                // util::gotoXY(0, 28);
-                // for (const auto& entry : status) {
-                //     std::cout << "Entry: ((" << entry.first.first << ", " << entry.first.second << "), (" << entry.second.first << ", " << entry.second.second << "))\n";
-                // }
-                // system("pause");
             }
 
             // placing on the display grid....
@@ -313,31 +302,20 @@ int main() {
     
     initPlayers();
     while(true) {
-        util::gotoXY(58, 10); std::cout << "  ";util::gotoXY(58, 6); std::cout << GREEN_TEXT << "> " << RESET; playerMove('X');
-        util::gotoXY(58, 6); std::cout << "  ";util::gotoXY(58, 10); std::cout << GREEN_TEXT << "> " << RESET; playerMove('O');
+        util::gotoXY(58, 10); std::cout << "  "; util::gotoXY(58, 6); std::cout << GREEN_TEXT << "> " << RESET; playerMove('X');
+        util::gotoXY(58, 6); std::cout << "  "; util::gotoXY(58, 10); std::cout << GREEN_TEXT << "> " << RESET; playerMove('O');
         if(checkWinInSubMatrix(finalWin)) {
-            // system("cls");
-            util::gotoXY(0, 34); 
+            system("cls");
+            util::gotoXY(0, 33); 
             std::cout << "WE HAVE A WINNER !"; system("pause");
         }
-
-        //? DEBUGGING PURPOSE....
-        // playerMove('X');
-        // playerMove('O');
-        // playerMove('X');
-        // playerMove('O');
-        // playerMove('X');
-        // playerMove('O');
-        // system("pause");
         util::gotoXY(0,35);
-        for(int i=0; i<3; i++) { // just to check the i/p to array(inverted)....
-            for(int j=0; j<3; j++) {
-                std::cout << " | " << finalWin[j][i];
-            }
-            std::cout << std::endl;
-        }
-        // system("pause");
-        // checkWin();
+        // for(int i=0; i<3; i++) { // just to check the i/p to array(inverted)....
+        //     for(int j=0; j<3; j++) {
+        //         std::cout << " | " << finalWin[j][i];
+        //     }
+        //     std::cout << std::endl;
+        // }
     }
     return 0;
 }
