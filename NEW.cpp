@@ -154,17 +154,44 @@ std::vector<std::vector<char>> extractSubMatrix(std::vector<std::vector<char>>& 
     }
     return subMatrix;
 }
-bool checkWinInSubMatrix(const std::vector<std::vector<char>>& subMatrix) { // function to check win in 3x3 grid(sub-grid)....
+// bool checkWinInSubMatrix(const std::vector<std::vector<char>>& subMatrix) { // function to check win in 3x3 grid(sub-grid)....
+//     // Check rows and columns for a win....
+//     for (int i = 0; i < 3; ++i) {
+//         if (subMatrix[i][0] == subMatrix[i][1] && subMatrix[i][1] == subMatrix[i][2] && subMatrix[i][0] != ' ') return true; // Row win....
+//         if (subMatrix[0][i] == subMatrix[1][i] && subMatrix[1][i] == subMatrix[2][i] && subMatrix[0][i] != ' ') return true; // Column win....
+//     }
+//     // Check diagonals for a win....
+//     if (subMatrix[0][0] == subMatrix[1][1] && subMatrix[1][1] == subMatrix[2][2] && subMatrix[0][0] != ' ') return true; // Diagonal win....
+//     if (subMatrix[0][2] == subMatrix[1][1] && subMatrix[1][1] == subMatrix[2][0] && subMatrix[0][2] != ' ') return true; // Diagonal win....
+//     return false; // No win in the submatrix....
+// }
+char checkWinInSubMatrix(const std::vector<std::vector<char>>& subMatrix) {
     // Check rows and columns for a win....
     for (int i = 0; i < 3; ++i) {
-        if (subMatrix[i][0] == subMatrix[i][1] && subMatrix[i][1] == subMatrix[i][2] && subMatrix[i][0] != ' ') return true; // Row win....
-        if (subMatrix[0][i] == subMatrix[1][i] && subMatrix[1][i] == subMatrix[2][i] && subMatrix[0][i] != ' ') return true; // Column win....
+        if (subMatrix[i][0] == subMatrix[i][1] && subMatrix[i][1] == subMatrix[i][2] && subMatrix[i][0] != ' ') { return subMatrix[i][0]; } // returns winning symbol....
+        if (subMatrix[0][i] == subMatrix[1][i] && subMatrix[1][i] == subMatrix[2][i] && subMatrix[0][i] != ' ') { return subMatrix[0][i]; }
     }
+
     // Check diagonals for a win....
-    if (subMatrix[0][0] == subMatrix[1][1] && subMatrix[1][1] == subMatrix[2][2] && subMatrix[0][0] != ' ') return true; // Diagonal win....
-    if (subMatrix[0][2] == subMatrix[1][1] && subMatrix[1][1] == subMatrix[2][0] && subMatrix[0][2] != ' ') return true; // Diagonal win....
-    return false; // No win in the submatrix....
+    if (subMatrix[0][0] == subMatrix[1][1] && subMatrix[1][1] == subMatrix[2][2] && subMatrix[0][0] != ' ') { return subMatrix[0][0]; }
+    if (subMatrix[0][2] == subMatrix[1][1] && subMatrix[1][1] == subMatrix[2][0] && subMatrix[0][2] != ' ') { return subMatrix[0][2]; }
+
+    // Check for a draw
+    bool isDraw = true;
+    for (int i = 0; i < 3; ++i) {
+        for (int j = 0; j < 3; ++j) {
+            if (subMatrix[i][j] == ' ') {
+                isDraw = false;
+                break;
+            }
+        }
+    }
+    if (isDraw) {
+        return 'D'; // Return 'D' for draw
+    }
+    return ' '; // No win or draw
 }
+
 
 void place(char player) {
    tabEnable = false; // to disable the 'tab' functionality, after player makes his first move....
@@ -173,7 +200,7 @@ void place(char player) {
         if(grid[y][x] == ' ') { // (y,x) since, arrow keys (x,y) == grid (y,x).
             grid[y][x] = 'X';
 
-            if(checkWinInSubMatrix(extractSubMatrix(grid, Y_Min, X_Min))) {
+            if(checkWinInSubMatrix(extractSubMatrix(grid, Y_Min, X_Min)) != ' ') {
                 int gNo = getSubgridNumber(x, y);
                 int row = (gNo - 1) / 3;
                 int col = (gNo - 1) % 3;
@@ -196,7 +223,7 @@ void place(char player) {
         if(grid[y][x] == ' ') { 
             grid[y][x] = 'O'; 
 
-            if(checkWinInSubMatrix(extractSubMatrix(grid, Y_Min, X_Min))) {
+            if(checkWinInSubMatrix(extractSubMatrix(grid, Y_Min, X_Min)) != ' ') {
                 int gNo = getSubgridNumber(x, y);
                 int row = (gNo - 1) / 3;
                 int col = (gNo - 1) % 3;
@@ -304,18 +331,21 @@ int main() {
     while(true) {
         util::gotoXY(58, 10); std::cout << "  "; util::gotoXY(58, 6); std::cout << GREEN_TEXT << "> " << RESET; playerMove('X');
         util::gotoXY(58, 6); std::cout << "  "; util::gotoXY(58, 10); std::cout << GREEN_TEXT << "> " << RESET; playerMove('O');
-        if(checkWinInSubMatrix(finalWin)) {
-            system("cls");
-            util::gotoXY(0, 33); 
-            std::cout << "WE HAVE A WINNER !"; system("pause");
+        
+        char result = checkWinInSubMatrix(finalWin);
+        if(result == 'D') { 
+            util::gotoXY(0, 0); 
+            std::cout << "ITS A DRAW !"; system("pause"); exit(1);
+        } else if(result == 'X') {
+            util::gotoXY(0, 0); 
+            std::cout << "'X' WINS !"; system("pause"); exit(1);
+        } else if(result == 'O') {
+            util::gotoXY(0, 0); 
+            std::cout << "'O' WINS !"; system("pause"); exit(1);
+        } else {
+            // do nothing....
         }
         util::gotoXY(0,35);
-        // for(int i=0; i<3; i++) { // just to check the i/p to array(inverted)....
-        //     for(int j=0; j<3; j++) {
-        //         std::cout << " | " << finalWin[j][i];
-        //     }
-        //     std::cout << std::endl;
-        // }
     }
     return 0;
 }
