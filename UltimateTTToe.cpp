@@ -8,6 +8,7 @@
 #include <algorithm>
 #include "util.h"
 #include "textstyling.h"
+
 #define MAX_outer 9
 #define MAX_inner 3
 
@@ -55,6 +56,17 @@ void displayMsg(int x, int y, std::string msg, const char* color);
 char checkWinInSubMatrix(const std::vector<std::vector<char>>& subMatrix);
 std::vector<std::vector<char>> extractSubMatrix(std::vector<std::vector<char>>& mainMatrix, int startRow, int startCol);
 
+/**
+ * The function "getSubgridNumber" returns the grid number in which a player has made a move in a 9x9
+ * grid.
+ * 
+ * @param i The parameter "i" represents the column index of the cell in the main grid. It is
+ * zero-based, meaning the first column has an index of 0, the second column has an index of 1, and so
+ * on.
+ * @param j The parameter "j" represents the row index of the cell in the main grid.
+ * 
+ * @return the subgrid number in which the current player played.
+ */
 int getSubgridNumber(int i, int j) { // returns the grid in which current player played (1, 2, 3, 4, 5, 6, 7, 8 or 9)....
     int subgridRow = j / 3;
     int subgridCol = i / 3;
@@ -62,6 +74,16 @@ int getSubgridNumber(int i, int j) { // returns the grid in which current player
     return subgridNumber;
 }
 
+/**
+ * The function `getGridNumber` takes the current x and y coordinates and returns the grid number in
+ * which the next player can play.
+ * 
+ * @param curr_x The current x-coordinate of the player's position on the grid.
+ * @param curr_y The parameter `curr_y` represents the current y-coordinate of the player's position on
+ * the grid.
+ * 
+ * @return The function `getGridNumber` returns the grid number in which the next player can play.
+ */
 int getGridNumber(int curr_x, int curr_y) { // returns the grid in which next player can play.... 
     std::vector<std::pair<int, int>> currCoordinates = {{curr_x, curr_y}};
     for (int i=0; i<9; i++) {
@@ -73,6 +95,13 @@ int getGridNumber(int curr_x, int curr_y) { // returns the grid in which next pl
     return -1;
 }
 
+/**
+ * The function "switchGrid" is used to determine the next grid to switch to based on the current
+ * grid's status and the player's input coordinates.
+ * 
+ * @param i_x The parameter `i_x` represents the x-coordinate of the grid that needs to be switched.
+ * @param i_y The parameter `i_y` represents the y-coordinate of a point in a grid.
+ */
 void switchGrid(int i_x, int i_y) {
     int visitedGrids = 0;
     int gridNo = getGridNumber(i_x, i_y);
@@ -102,6 +131,18 @@ void switchGrid(int i_x, int i_y) {
     }
 }
 
+/**
+ * The function `displayMsg` displays a message at a specified position on the console with a specified
+ * color, and then clears the message after a 2-second delay.
+ * 
+ * @param x The x-coordinate of the position where the message will be displayed on the screen.
+ * @param y The parameter "y" represents the y-coordinate of the position where the message will be
+ * displayed on the screen.
+ * @param msg The parameter "msg" is a string that represents the message that you want to display on
+ * the screen.
+ * @param color The "color" parameter is a pointer to a character array that represents the color of
+ * the text to be displayed. It is used to change the color of the text output on the console.
+ */
 void displayMsg(int x, int y, std::string msg, const char* color) {
     util::gotoXY(x, y);
     std::cout << color << msg << RESET;
@@ -109,6 +150,9 @@ void displayMsg(int x, int y, std::string msg, const char* color) {
     util::clearXY(x, y, msg.length());
 }
 
+/**
+ * The function "display" is used to print a formatted tic-tac-toe game board with game statistics.
+ */
 void display() { 
     system("cls");
     std::cout << CYAN_TEXT << "              'ULTIMATE' TIC-TAC-TOE" << RESET << std::endl
@@ -139,6 +183,18 @@ void display() {
           << "ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ  ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ" << std::endl;
 }
 
+/**
+ * The function "extractSubMatrix" takes a main matrix and starting row and column indices, and returns
+ * a sub-matrix of size 3x3 extracted from the main matrix.
+ * 
+ * @param mainMatrix A 2D vector representing the main 9x9 matrix grid.
+ * @param startRow The starting row index of the sub-matrix in the main matrix.
+ * @param startCol The startCol parameter is the starting column index of the sub-matrix in the
+ * mainMatrix.
+ * 
+ * @return The function `extractSubMatrix` returns a 3x3 sub-matrix of characters extracted from the
+ * main matrix.
+ */
 std::vector<std::vector<char>> extractSubMatrix(std::vector<std::vector<char>>& mainMatrix, int startRow, int startCol) { // function to extract sub-goto_coordinates_grid(3x3 goto_coordinates_grid) from the main 9x9 matrix grid.....
     std::vector<std::vector<char>> subMatrix(3, std::vector<char>(3, ' '));
     for (int i=0; i<3; i++) {
@@ -148,6 +204,18 @@ std::vector<std::vector<char>> extractSubMatrix(std::vector<std::vector<char>>& 
     }
     return subMatrix;
 }
+/**
+ * The function `checkWinInSubMatrix` checks if there is a win or draw in a given 3x3 submatrix of a
+ * tic-tac-toe game.
+ * 
+ * @param subMatrix The subMatrix parameter is a 2D vector of characters representing a 3x3 sub-matrix.
+ * Each element in the subMatrix represents a cell in the sub-matrix, and can be either 'X', 'O', or '
+ * ' (empty).
+ * 
+ * @return a character that represents the result of the game. If there is a win, it returns the
+ * winning symbol ('X' or 'O'). If there is a draw, it returns 'D'. If there is no win or draw, it
+ * returns a space character (' ').
+ */
 char checkWinInSubMatrix(const std::vector<std::vector<char>>& subMatrix) {
     // Check rows and columns for a win....
     for (int i = 0; i < 3; ++i) {
@@ -172,15 +240,13 @@ char checkWinInSubMatrix(const std::vector<std::vector<char>>& subMatrix) {
     return ' '; // No win or draw....
 }
 
-void clearWonGrid() {
-    util::clearXY(util::getXCoordinates(X_Min)-1, util::getYCoordinates(Y_Min), 11);
-    util::clearXY(util::getXCoordinates(X_Min)-1, util::getYCoordinates(Y_Min+1), 11);
-    util::clearXY(util::getXCoordinates(X_Min)-1, util::getYCoordinates(Y_Min+1)-1, 11);
-    util::clearXY(util::getXCoordinates(X_Min)-1, util::getYCoordinates(Y_Min+2), 11);
-    util::clearXY(util::getXCoordinates(X_Min)-1, util::getYCoordinates(Y_Min+2)-1, 11);
-}
-
-
+/**
+ * The function "place" is used to allow a player to make a move in a tic-tac-toe game, updating the
+ * game grid and checking for a win condition.
+ * 
+ * @param player The parameter "player" is a character that represents the current player. It can be
+ * either 'X' or 'O'.
+ */
 void place(char player) {
    tabEnable = false; // to disable the 'tab' functionality, after player makes his first move....
 
@@ -231,6 +297,12 @@ void place(char player) {
     }
 }
 
+/**
+ * The function "move" takes a character key as input and moves the position (x, y) based on the arrow
+ * key pressed.
+ * 
+ * @param key The key parameter represents the ASCII value of the key that was pressed.
+ */
 void move(char key) {
     if(key == 72 && y > Y_Min) { y--; } // Up arrow key...
     else if(key == 80 && y < Y_Max-1) { y++; } // Down arrow key...
@@ -238,6 +310,13 @@ void move(char key) {
     else if(key == 77 && x < X_Max-1) { x++; } // Right arrow key...
 }
 
+/**
+ * The function `playerMove` allows a player to make a move in a game, handling various key inputs and
+ * updating the game state accordingly.
+ * 
+ * @param player The parameter "player" is a character that represents the current player making a
+ * move. It can be either 'X' or 'O'.
+ */
 void playerMove(char player) {
     int key;
     util::gotoXY(util::getXCoordinates(x), util::getYCoordinates(y)); // to indicate current position....
@@ -291,6 +370,11 @@ void playerMove(char player) {
         util::gotoXY(util::getXCoordinates(x), util::getYCoordinates(y)); // to indicate current position....
     }
 }
+
+/**
+ * The function `initPlayers()` initializes the player details by prompting the user to enter the names
+ * of Player 1 and Player 2, and then displaying the names on the screen.
+ */
 void initPlayers() { // sets the player details....
     display();
     util::gotoXY(60, 17);
