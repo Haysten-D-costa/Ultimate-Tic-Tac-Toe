@@ -17,7 +17,8 @@ static int X_Min = 0;
 static int Y_Min = 0;
 static int X_Max = 3;
 static int Y_Max = 3;
-
+std::string player_1;
+std::string player_2;
 bool tabEnable = true;
 std::vector<std::vector<char>> grid = {
     {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
@@ -51,6 +52,8 @@ void playerMove(char player);
 void switchGrid(int i_x, int i_y);
 int getGridNumber(int curr_x, int curr_y);
 void displayMsg(int x, int y, std::string msg, const char* color);
+char checkWinInSubMatrix(const std::vector<std::vector<char>>& subMatrix);
+std::vector<std::vector<char>> extractSubMatrix(std::vector<std::vector<char>>& mainMatrix, int startRow, int startCol);
 
 int getSubgridNumber(int i, int j) { // returns the grid in which current player played (1, 2, 3, 4, 5, 6, 7, 8 or 9)....
     int subgridRow = j / 3;
@@ -79,11 +82,11 @@ void switchGrid(int i_x, int i_y) {
         gridNo = status[gridNo].first;
 
         ++visitedGrids;
-        if (visitedGrids > 9) {
-            util::gotoXY(0, 0);
-            std::cout << "DEADLOCK";
-            system("pause");
-            exit(1);
+        if ((visitedGrids > 9) && (!checkWinInSubMatrix(extractSubMatrix(grid, Y_Min, X_Min)) != ' ')) {
+            tabEnable = true; // if deadlock, allow the player to tab to any board required....
+            util::gotoXY(68, 14); std::cout << RED_TEXT << "No more valid moves possible...." << RESET;
+            displayMsg(69, 17, "***** GAME OVER ! *****", RED_TEXT);
+            util::clearXY(68, 14, 32);
         }
     }
     if (gridNo >= 1 && gridNo <= 9) {
@@ -196,11 +199,11 @@ void place(char player) {
             
             // placing on the display grid....
             util::gotoXY(util::getXCoordinates(x), util::getYCoordinates(y)); // goto coordinate position (x,y),
-            std::cout << "X"; // place character.
+            std::cout << "X"; // place character....
             switchGrid(x, y);
         } else { 
             displayMsg(68, 14, "Invalid move ! Try again....", RED_TEXT);
-            playerMove('X'); // allow player to play correct move again...
+            playerMove('X'); // allow player to play correct move again....
         }
     } else { 
         if(grid[y][x] == ' ') { 
@@ -218,7 +221,7 @@ void place(char player) {
 
             // placing on the display grid....
             util::gotoXY(util::getXCoordinates(x), util::getYCoordinates(y)); // goto coordinate position (x,y),
-            std::cout << "O"; // place character.
+            std::cout << "O"; // place character....
             switchGrid(x, y);
         } else {
             displayMsg(68, 14, "Invalid move ! Try again....", RED_TEXT);
@@ -288,24 +291,21 @@ void playerMove(char player) {
     }
 }
 void initPlayers() { // sets the player details....
-    std::string player_1;
-    std::string player_2;
-
     display();
-    // util::gotoXY(60, 17);
-    // std::cout << GREEN_TEXT << "Enter Player 1 name : " << RESET; 
-    // getline(std::cin, player_1);
-    // util::gotoXY(69, 7);
-    // std::cout << player_1;
-    // util::clearXY(82, 17, player_1.length());
+    util::gotoXY(60, 17);
+    std::cout << GREEN_TEXT << "Enter Player 1 name : " << RESET; 
+    getline(std::cin, player_1);
+    util::gotoXY(69, 7);
+    std::cout << player_1;
+    util::clearXY(82, 17, player_1.length());
     
-    // util::gotoXY(60, 17);
-    // std::cout << GREEN_TEXT << "Enter Player 2 name : " << RESET; getline(std::cin, player_2);
-    // util::gotoXY(69, 11);
-    // std::cout << player_2;
-    // util::gotoXY(60, 17);
-    // util::clearXY(60, 17, (22+player_2.length()));
-    // displayMsg(69, 17, "***** GAME BEGINS *****", RED_TEXT);
+    util::gotoXY(60, 17);
+    std::cout << GREEN_TEXT << "Enter Player 2 name : " << RESET; getline(std::cin, player_2);
+    util::gotoXY(69, 11);
+    std::cout << player_2;
+    util::gotoXY(60, 17);
+    util::clearXY(60, 17, (22+player_2.length()));
+    displayMsg(69, 17, "***** GAME BEGINS *****", RED_TEXT);
 }
 
 int main() {
@@ -316,16 +316,19 @@ int main() {
         util::gotoXY(58, 10); std::cout<< "  "; util::gotoXY(58, 6); std::cout << GREEN_TEXT << "> " << RESET; playerMove('X');
         result = checkWinInSubMatrix(finalWin);
         if(result == 'D') { 
-            util::gotoXY(70, 20); 
-            std::cout << "ITS A DRAW !";
+            util::gotoXY(67, 17); 
+            std::cout << GREEN_TEXT << "ITS A DRAW !" << RESET;
+            util::gotoXY(0, 28);
             exit(1);
         } else if(result == 'X') {
-            util::gotoXY(70, 20); 
-            std::cout << "'X' WINS !";
+            util::gotoXY(67, 17); 
+            std::cout << GREEN_TEXT << player_1 << " is the WINNER !" << RESET;
+            util::gotoXY(0, 28);
             exit(1);
         } else if(result == 'O') {
-            util::gotoXY(70, 20); 
-            std::cout << "'O' WINS !";
+            util::gotoXY(67, 17); 
+            std::cout << GREEN_TEXT << player_2 << " is the WINNER !" << RESET;
+            util::gotoXY(0, 28);
             exit(1);
         } else {
             // do nothing....
@@ -334,16 +337,19 @@ int main() {
         util::gotoXY(58, 6); std::cout << "  "; util::gotoXY(58, 10); std::cout << GREEN_TEXT << "> " << RESET; playerMove('O');
         result = checkWinInSubMatrix(finalWin);
         if(result == 'D') { 
-            util::gotoXY(70, 20); 
-            std::cout << "ITS A DRAW !";
+            util::gotoXY(67, 17); 
+            std::cout << GREEN_TEXT << "ITS A DRAW !" << RESET;
+            util::gotoXY(0, 28);
             exit(1);
         } else if(result == 'X') {
-            util::gotoXY(70, 20); 
-            std::cout << "'X' WINS !";
+            util::gotoXY(67, 17); 
+            std::cout << GREEN_TEXT << player_1 << " is the WINNER !" << RESET;
+            util::gotoXY(0, 28);
             exit(1);
         } else if(result == 'O') {
-            util::gotoXY(70, 20); 
-            std::cout << "'O' WINS !";
+            util::gotoXY(67, 17); 
+            std::cout << GREEN_TEXT << player_2 << " is the WINNER !" << RESET;
+            util::gotoXY(0, 28);
             exit(1);
         } else {
             // do nothing....
