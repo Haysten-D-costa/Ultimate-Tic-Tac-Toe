@@ -85,8 +85,9 @@ void switchGrid(int i_x, int i_y) {
         if ((visitedGrids > 9) && (!checkWinInSubMatrix(extractSubMatrix(grid, Y_Min, X_Min)) != ' ')) {
             tabEnable = true; // if deadlock, allow the player to tab to any board required....
             util::gotoXY(68, 14); std::cout << RED_TEXT << "No more valid moves possible...." << RESET;
-            displayMsg(69, 17, "***** GAME OVER ! *****", RED_TEXT);
-            util::clearXY(68, 14, 32);
+            util::gotoXY(69, 17); std::cout << GREEN_TEXT << "***** GAME OVER ! *****" << RESET;
+            util::gotoXY(0, 28);
+            exit(1);
         }
     }
     if (gridNo >= 1 && gridNo <= 9) {
