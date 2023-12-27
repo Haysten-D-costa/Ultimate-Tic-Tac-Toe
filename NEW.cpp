@@ -42,7 +42,7 @@ std::vector<std::vector<std::pair<int, int>>> goto_coordinates_grid = {
     {{2,2},{5,2},{8,2},{2,5},{5,5},{8,5},{2,8},{5,8},{8,8}}
 };
 std::vector<std::vector<char>> finalWin = {{' ',' ',' '},{' ',' ',' '},{' ',' ',' '}};
-std::vector<std::pair<std::pair<int, int>, std::pair<int, int>>> status;
+std::vector<std::pair<int, bool>> status(9, std::make_pair(0, false)); // initially, all 0, and false....
 
 void display();
 void move(char key);
@@ -52,14 +52,14 @@ void switchGrid(int i_x, int i_y);
 int getGridNumber(int curr_x, int curr_y);
 void displayMsg(int x, int y, std::string msg, const char* color);
 
-int getSubgridNumber(int i, int j) { // returns 1, 2, 3, 4, 5, 6, 7, 8 or 9....
+int getSubgridNumber(int i, int j) { // returns the grid in which current player played (1, 2, 3, 4, 5, 6, 7, 8 or 9)....
     int subgridRow = j / 3;
     int subgridCol = i / 3;
     int subgridNumber = subgridRow * 3 + subgridCol + 1;
     return subgridNumber;
 }
 
-int getGridNumber(int curr_x, int curr_y) {
+int getGridNumber(int curr_x, int curr_y) { // returns the grid in which next player can play.... 
     std::vector<std::pair<int, int>> currCoordinates = {{curr_x, curr_y}};
     for (int i=0; i<9; i++) {
         const auto& grid = goto_coordinates_grid[i];
@@ -69,31 +69,22 @@ int getGridNumber(int curr_x, int curr_y) {
     }
     return -1;
 }
-bool isInvalid(int x, int y) { // isInvalid() would mean, the grid is already won, hence invalid....
-    bool found = false;
-    std::pair<int, int> targetPair = {x, y};
-    int index = 0;
-    
-    for (const auto& entry : status) {
-        const auto& keyPair = entry.first;  // Assuming the first pair is the key....
-        if (keyPair.first == targetPair.first && keyPair.second == targetPair.second) {
-            found = true;
-            continue;
-        }
-        index++;
-    }
-    if(found) { return index; }
-    else { return 0; }
-}
 
 void switchGrid(int i_x, int i_y) {
+    int visitedGrids = 0;
+    int gridNo = getGridNumber(i_x, i_y);
 
-    int gridNo;
-    int index = isInvalid(i_x, i_y);
-    if (index) {
-        gridNo = getGridNumber(status[index].second.first, status[index].second.second);
-    } else {
-        gridNo = getGridNumber(i_x, i_y);
+    while (gridNo >= 1 && gridNo <= 9 && status[gridNo].second) {
+        // If the current grid is won, move to the next grid indicated by status[gridNo].first....
+        gridNo = status[gridNo].first;
+
+        ++visitedGrids;
+        if (visitedGrids > 9) {
+            util::gotoXY(0, 0);
+            std::cout << "DEADLOCK";
+            system("pause");
+            exit(1);
+        }
     }
     if (gridNo >= 1 && gridNo <= 9) {
         int row = (gridNo - 1) / 3;
@@ -199,10 +190,8 @@ void place(char player) {
                 int col = (gNo - 1) % 3;
                 finalWin[row][col] = 'X'; // updates the finalWin matrix....
                 
-                for (const auto& coordinate : goto_coordinates_grid[gNo-1]) {
-                    status.emplace_back(std::make_pair(std::make_pair(coordinate.first, coordinate.second), std::make_pair(x, y)));
-                }
-                clearWonGrid();
+                status[gNo].first = getGridNumber(x, y);
+                status[gNo].second = true;
             }
             
             // placing on the display grid....
@@ -223,10 +212,8 @@ void place(char player) {
                 int col = (gNo - 1) % 3;
                 finalWin[row][col] = 'O'; // updates the finalWin matrix....
                 
-                for (const auto& coordinate : goto_coordinates_grid[gNo-1]) {
-                    status.emplace_back(std::make_pair(std::make_pair(coordinate.first, coordinate.second), std::make_pair(x, y)));
-                }
-                clearWonGrid();
+                status[gNo].first = getGridNumber(x, y);
+                status[gNo].second = true;
             }
 
             // placing on the display grid....
@@ -257,11 +244,6 @@ void playerMove(char player) {
         switchGrid(coordinates[tabCounter][0], coordinates[tabCounter][1]);
         tabCounter = (tabCounter + 1) % 9;
     };
-    /*
-        if((x,y) == (already won grid)) {
-            then enable the tab functionality.....since grid invalid....
-        }
-    */
     while(true) {
         key = _getch();
         if (key == 27) { // escape key, to exit....
@@ -310,20 +292,20 @@ void initPlayers() { // sets the player details....
     std::string player_2;
 
     display();
-    util::gotoXY(60, 17);
-    std::cout << GREEN_TEXT << "Enter Player 1 name : " << RESET; 
-    getline(std::cin, player_1);
-    util::gotoXY(69, 7);
-    std::cout << player_1;
-    util::clearXY(82, 17, player_1.length());
+    // util::gotoXY(60, 17);
+    // std::cout << GREEN_TEXT << "Enter Player 1 name : " << RESET; 
+    // getline(std::cin, player_1);
+    // util::gotoXY(69, 7);
+    // std::cout << player_1;
+    // util::clearXY(82, 17, player_1.length());
     
-    util::gotoXY(60, 17);
-    std::cout << GREEN_TEXT << "Enter Player 2 name : " << RESET; getline(std::cin, player_2);
-    util::gotoXY(69, 11);
-    std::cout << player_2;
-    util::gotoXY(60, 17);
-    util::clearXY(60, 17, (22+player_2.length()));
-    displayMsg(69, 17, "***** GAME BEGINS *****", RED_TEXT);
+    // util::gotoXY(60, 17);
+    // std::cout << GREEN_TEXT << "Enter Player 2 name : " << RESET; getline(std::cin, player_2);
+    // util::gotoXY(69, 11);
+    // std::cout << player_2;
+    // util::gotoXY(60, 17);
+    // util::clearXY(60, 17, (22+player_2.length()));
+    // displayMsg(69, 17, "***** GAME BEGINS *****", RED_TEXT);
 }
 
 int main() {
