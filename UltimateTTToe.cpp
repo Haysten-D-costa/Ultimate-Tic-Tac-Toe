@@ -1,13 +1,16 @@
 // *  THE ULTIMATE TIC-TAC-TOE GAME !  
 
 #include <vector>
+#include <cstdlib>
 #include <conio.h>
 #include <utility>
 #include <unistd.h>
 #include <iostream>
 #include <algorithm>
+
 #include "util.h"
 #include "textstyling.h"
+#include "console_utils.h"
 
 #define MAX_outer 9
 #define MAX_inner 3
@@ -47,13 +50,15 @@ std::vector<std::vector<char>> finalWin = {{' ',' ',' '},{' ',' ',' '},{' ',' ',
 std::vector<std::pair<int, bool>> status(9, std::make_pair(0, false)); // initially, all 0, and false....
 
 void display();
+void initPlayers();
 void move(char key);
 void place(char player);
 void playerMove(char player);
-void switchGrid(int i_x, int i_y);
-int getGridNumber(int curr_x, int curr_y);
+void switchGrid(int x, int y);
+int getSubgridNumber(int x, int y);
+int getGridNumber(int x, int y);
 void displayMsg(int x, int y, std::string msg, const char* color);
-char checkWinInSubMatrix(const std::vector<std::vector<char>>& subMatrix);
+char checkSubgridWin(const std::vector<std::vector<char>>& subMatrix);
 std::vector<std::vector<char>> extractSubMatrix(std::vector<std::vector<char>>& mainMatrix, int startRow, int startCol);
 
 /**
@@ -111,7 +116,7 @@ void switchGrid(int i_x, int i_y) {
         gridNo = status[gridNo].first;
 
         ++visitedGrids;
-        if ((visitedGrids > 9) && (!checkWinInSubMatrix(extractSubMatrix(grid, Y_Min, X_Min)) != ' ')) {
+        if ((visitedGrids > 9) && (!checkSubgridWin(extractSubMatrix(grid, Y_Min, X_Min)) != ' ')) {
             tabEnable = true; // if deadlock, allow the player to tab to any board required....
             util::gotoXY(68, 14); std::cout << RED_TEXT << "No more valid moves possible...." << RESET;
             util::gotoXY(69, 17); std::cout << GREEN_TEXT << "***** GAME OVER ! *****" << RESET;
@@ -154,7 +159,7 @@ void displayMsg(int x, int y, std::string msg, const char* color) {
  * The function "display" is used to print a formatted tic-tac-toe game board with game statistics.
  */
 void display() { 
-    system("cls");
+    clearConsole();
     std::cout << CYAN_TEXT << "              'ULTIMATE' TIC-TAC-TOE" << RESET << std::endl
               << "ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿  ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿" << std::endl
               << "³  ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿  ³  ³ " << CYAN_BACKGROUND << "               " << RESET << CYAN_TEXT << " GAME STATISTICS " << RESET << CYAN_BACKGROUND << "               " << RESET << " ³" << std::endl
@@ -180,7 +185,7 @@ void display() {
               << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³                                                 ³" << std::endl
               << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³                                                 ³" << std::endl
               << "³  ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ  ³  ³                                                 ³" << std::endl
-          << "ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ  ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ" << std::endl;
+              << "ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ  ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ" << std::endl;
 }
 
 /**
@@ -205,7 +210,7 @@ std::vector<std::vector<char>> extractSubMatrix(std::vector<std::vector<char>>& 
     return subMatrix;
 }
 /**
- * The function `checkWinInSubMatrix` checks if there is a win or draw in a given 3x3 submatrix of a
+ * The function `checkSubgridWin` checks if there is a win or draw in a given 3x3 submatrix of a
  * tic-tac-toe game.
  * 
  * @param subMatrix The subMatrix parameter is a 2D vector of characters representing a 3x3 sub-matrix.
@@ -216,7 +221,7 @@ std::vector<std::vector<char>> extractSubMatrix(std::vector<std::vector<char>>& 
  * winning symbol ('X' or 'O'). If there is a draw, it returns 'D'. If there is no win or draw, it
  * returns a space character (' ').
  */
-char checkWinInSubMatrix(const std::vector<std::vector<char>>& subMatrix) {
+char checkSubgridWin(const std::vector<std::vector<char>>& subMatrix) {
     // Check rows and columns for a win....
     for (int i = 0; i < 3; ++i) {
         if (subMatrix[i][0] == subMatrix[i][1] && subMatrix[i][1] == subMatrix[i][2] && subMatrix[i][0] != ' ') { return subMatrix[i][0]; } // returns winning symbol....
@@ -254,7 +259,7 @@ void place(char player) {
         if(grid[y][x] == ' ') { // (y,x) since, arrow keys (x,y) == grid (y,x).
             grid[y][x] = 'X';
 
-            if(checkWinInSubMatrix(extractSubMatrix(grid, Y_Min, X_Min)) != ' ') {
+            if(checkSubgridWin(extractSubMatrix(grid, Y_Min, X_Min)) != ' ') {
                 int gNo = getSubgridNumber(x, y);
                 int row = (gNo - 1) / 3;
                 int col = (gNo - 1) % 3;
@@ -276,7 +281,7 @@ void place(char player) {
         if(grid[y][x] == ' ') { 
             grid[y][x] = 'O'; 
 
-            if(checkWinInSubMatrix(extractSubMatrix(grid, Y_Min, X_Min)) != ' ') {
+            if(checkSubgridWin(extractSubMatrix(grid, Y_Min, X_Min)) != ' ') {
                 int gNo = getSubgridNumber(x, y);
                 int row = (gNo - 1) / 3;
                 int col = (gNo - 1) % 3;
@@ -340,7 +345,7 @@ void playerMove(char player) {
             util::clearXY(68, 14, msg.length() + 11);
             if(confirm == 'Y' || confirm == 'y') { 
                 displayMsg(68, 14, "Exiting !....", RED_TEXT);
-                system("cls");
+                clearConsole();
                 exit(1);
             } else {
                 // continue the game....
@@ -399,7 +404,7 @@ int main() {
     initPlayers();
     while(true) {
         util::gotoXY(58, 10); std::cout<< "  "; util::gotoXY(58, 6); std::cout << GREEN_TEXT << "> " << RESET; playerMove('X');
-        result = checkWinInSubMatrix(finalWin);
+        result = checkSubgridWin(finalWin);
         if(result == 'D') { 
             util::gotoXY(67, 17); 
             std::cout << GREEN_TEXT << "ITS A DRAW !" << RESET;
@@ -420,7 +425,7 @@ int main() {
         }
 
         util::gotoXY(58, 6); std::cout << "  "; util::gotoXY(58, 10); std::cout << GREEN_TEXT << "> " << RESET; playerMove('O');
-        result = checkWinInSubMatrix(finalWin);
+        result = checkSubgridWin(finalWin);
         if(result == 'D') { 
             util::gotoXY(67, 17); 
             std::cout << GREEN_TEXT << "ITS A DRAW !" << RESET;
