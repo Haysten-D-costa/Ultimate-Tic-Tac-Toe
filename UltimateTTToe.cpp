@@ -158,34 +158,34 @@ void displayMsg(int x, int y, std::string msg, const char* color) {
 /**
  * The function "display" is used to print a formatted tic-tac-toe game board with game statistics.
  */
-void display() { 
-    clearConsole(); 
+void display() {
+    clearConsole();
     std::cout << CYAN_TEXT << "              'ULTIMATE' TIC-TAC-TOE" << RESET << std::endl
-        << "ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿  ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿" << std::endl
-        << "³  ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿  ³  ³ " << CYAN_BACKGROUND << "               " << RESET << CYAN_TEXT << " GAME STATISTICS " << RESET << CYAN_BACKGROUND << "               " << RESET << " ³" << std::endl
-        << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´" << std::endl
-        << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³                                                 ³" << std::endl
-        << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³     " << CYAN_TEXT << "PLAYER 1  : " << RESET << "                                ³" << std::endl
-        << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³     Name   :                                    ³" << std::endl
-        << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³     Symbol : " << RED_TEXT << "'X'"<< RESET << "                                |" << std::endl
-        << "³  ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ  ³  ³                                                 ³" << std::endl
-        << "³  ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÎÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÎÍÍÍÍÍÍÍÍÍÍÍÍÍÍ  ³  ³     " << CYAN_TEXT << "PLAYER 2  : " << RESET << "                                ³" << std::endl
-        << "³  ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿  ³  ³     Name   :                                    ³" << std::endl
-        << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³     Symbol : " << RED_TEXT << "'O'"<< RESET << "                                |" << std::endl
-        << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³                                                 ³" << std::endl
-        << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³     " << CYAN_TEXT << "ERROR : " << RESET << "                                    ³" << std::endl
-        << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³                                                 ³" << std::endl
-        << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³                                                 ³" << std::endl
-        << "³  ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ  ³  ³                                                 ³" << std::endl
-        << "³  ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÎÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÎÍÍÍÍÍÍÍÍÍÍÍÍÍÍ  ³  ³                                                 ³" << std::endl
-        << "³  ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿  ³  ³                                                 ³" << std::endl
-        << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³                                                 ³" << std::endl
-        << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³                                                 ³" << std::endl
-        << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³                                                 ³" << std::endl
-        << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³                                                 ³" << std::endl
-        << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³                                                 ³" << std::endl
-        << "³  ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ  ³  ³                                                 ³" << std::endl
-        << "ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ  ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ" << std::endl;
+              << "ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿  ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿" << std::endl
+              << "³  ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿  ³  ³ " << CYAN_BACKGROUND << "               " << RESET << CYAN_TEXT << " GAME STATISTICS " << RESET << CYAN_BACKGROUND << "               " << RESET << " ³" << std::endl
+              << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´" << std::endl
+              << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³                                                 ³" << std::endl
+              << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³     " << CYAN_TEXT << "PLAYER 1  : " << RESET << "                                ³" << std::endl
+              << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³     Name   :                                    ³" << std::endl
+              << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³     Symbol : " << RED_TEXT << "'X'"<< RESET << "                                |" << std::endl
+              << "³  ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ  ³  ³                                                 ³" << std::endl
+              << "³  ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÎÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÎÍÍÍÍÍÍÍÍÍÍÍÍÍÍ  ³  ³     " << CYAN_TEXT << "PLAYER 2  : " << RESET << "                                ³" << std::endl
+              << "³  ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿  ³  ³     Name   :                                    ³" << std::endl
+              << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³     Symbol : " << RED_TEXT << "'O'"<< RESET << "                                |" << std::endl
+              << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³                                                 ³" << std::endl
+              << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³     " << CYAN_TEXT << "ERROR : " << RESET << "                                    ³" << std::endl
+              << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³                                                 ³" << std::endl
+              << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³                                                 ³" << std::endl
+              << "³  ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ  ³  ³                                                 ³" << std::endl
+              << "³  ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÎÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÎÍÍÍÍÍÍÍÍÍÍÍÍÍÍ  ³  ³                                                 ³" << std::endl
+              << "³  ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿  ³  ³                                                 ³" << std::endl
+              << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³                                                 ³" << std::endl
+              << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³                                                 ³" << std::endl
+              << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³                                                 ³" << std::endl
+              << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³                                                 ³" << std::endl
+              << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³                                                 ³" << std::endl
+              << "³  ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ  ³  ³                                                 ³" << std::endl
+              << "ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ  ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ" << std::endl;
 }
 
 /**
@@ -408,15 +408,32 @@ void playerMove(char player) {
  */
 void initPlayers() { // sets the player details....
     display();
-    util::gotoXY(60, 17);
-    std::cout << GREEN_TEXT << "Enter Player 1 name : " << RESET; 
-    getline(std::cin, player_1);
+
+    while (true) {
+        util::gotoXY(60, 17);
+        std::cout << GREEN_TEXT << "Enter Player 1 name : " << RESET; 
+        getline(std::cin, player_1);
+        if (!player_1.empty() && player_1.find_first_not_of("\t ") != std::string::npos) {
+            break; // Valid name, exit the loop....
+        } else {
+            displayMsg(68, 14, "Invalid name !", RED_TEXT);
+            displayMsg(68, 14, "Please enter a valid name....", RED_TEXT);
+        }
+    }
     util::gotoXY(69, 7);
     std::cout << player_1;
     util::clearXY(82, 17, player_1.length());
-    
-    util::gotoXY(60, 17);
-    std::cout << GREEN_TEXT << "Enter Player 2 name : " << RESET; getline(std::cin, player_2);
+    while (true) {
+        util::gotoXY(60, 17);
+        std::cout << GREEN_TEXT << "Enter Player 2 name : " << RESET; 
+        getline(std::cin, player_2);
+        if (!player_2.empty() && player_2.find_first_not_of("\t ") != std::string::npos) {
+            break;
+        } else {
+            displayMsg(68, 14, "Invalid name !", RED_TEXT);
+            displayMsg(68, 14, "Please enter a valid name....", RED_TEXT);
+        }
+    }
     util::gotoXY(69, 11);
     std::cout << player_2;
     util::gotoXY(60, 17);
