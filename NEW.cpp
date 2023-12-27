@@ -292,69 +292,41 @@ void playerMove(char player) {
 }
 void initPlayers() { // sets the player details....
     display();
-    util::gotoXY(60, 17);
-    std::cout << GREEN_TEXT << "Enter Player 1 name : " << RESET; 
-    getline(std::cin, player_1);
-    util::gotoXY(69, 7);
-    std::cout << player_1;
-    util::clearXY(82, 17, player_1.length());
+    // util::gotoXY(60, 17);
+    // std::cout << GREEN_TEXT << "Enter Player 1 name : " << RESET; 
+    // getline(std::cin, player_1);
+    // util::gotoXY(69, 7);
+    // std::cout << player_1;
+    // util::clearXY(82, 17, player_1.length());
     
-    util::gotoXY(60, 17);
-    std::cout << GREEN_TEXT << "Enter Player 2 name : " << RESET; getline(std::cin, player_2);
-    util::gotoXY(69, 11);
-    std::cout << player_2;
-    util::gotoXY(60, 17);
-    util::clearXY(60, 17, (22+player_2.length()));
-    displayMsg(69, 17, "***** GAME BEGINS *****", RED_TEXT);
+    // util::gotoXY(60, 17);
+    // std::cout << GREEN_TEXT << "Enter Player 2 name : " << RESET; getline(std::cin, player_2);
+    // util::gotoXY(69, 11);
+    // std::cout << player_2;
+    // util::gotoXY(60, 17);
+    // util::clearXY(60, 17, (22+player_2.length()));
+    // displayMsg(69, 17, "***** GAME BEGINS *****", RED_TEXT);
 }
 
 int main() {
     
     char result;
     initPlayers();
-    while(true) {
-        util::gotoXY(58, 10); std::cout<< "  "; util::gotoXY(58, 6); std::cout << GREEN_TEXT << "> " << RESET; playerMove('X');
-        result = checkWinInSubMatrix(finalWin);
-        if(result == 'D') { 
-            util::gotoXY(67, 17); 
-            std::cout << GREEN_TEXT << "ITS A DRAW !" << RESET;
-            util::gotoXY(0, 28);
-            exit(1);
-        } else if(result == 'X') {
-            util::gotoXY(67, 17); 
-            std::cout << GREEN_TEXT << player_1 << " is the WINNER !" << RESET;
-            util::gotoXY(0, 28);
-            exit(1);
-        } else if(result == 'O') {
-            util::gotoXY(67, 17); 
-            std::cout << GREEN_TEXT << player_2 << " is the WINNER !" << RESET;
-            util::gotoXY(0, 28);
-            exit(1);
-        } else {
-            // do nothing....
-        }
+    // while(true) {
+        // util::gotoXY(58, 10); std::cout<< "  "; util::gotoXY(58, 6); std::cout << GREEN_TEXT << "> " << RESET; playerMove('X');
+        // util::gotoXY(58, 10); std::cout<< "  "; util::gotoXY(58, 6); std::cout << GREEN_TEXT << "> " << RESET; playerMove('O');
+        util::gotoXY(4, 3);
+        std::cout << "*";
+        
+        util::gotoXY(20, 3);
+        std::cout << "*";
+        
+        util::gotoXY(36, 3);
+        std::cout << "*";
+        
+    // }
 
-        util::gotoXY(58, 6); std::cout << "  "; util::gotoXY(58, 10); std::cout << GREEN_TEXT << "> " << RESET; playerMove('O');
-        result = checkWinInSubMatrix(finalWin);
-        if(result == 'D') { 
-            util::gotoXY(67, 17); 
-            std::cout << GREEN_TEXT << "ITS A DRAW !" << RESET;
-            util::gotoXY(0, 28);
-            exit(1);
-        } else if(result == 'X') {
-            util::gotoXY(67, 17); 
-            std::cout << GREEN_TEXT << player_1 << " is the WINNER !" << RESET;
-            util::gotoXY(0, 28);
-            exit(1);
-        } else if(result == 'O') {
-            util::gotoXY(67, 17); 
-            std::cout << GREEN_TEXT << player_2 << " is the WINNER !" << RESET;
-            util::gotoXY(0, 28);
-            exit(1);
-        } else {
-            // do nothing....
-        }
-        util::gotoXY(0,35);
-    }
+
+    util::gotoXY(35,35);
     return 0;
 }
