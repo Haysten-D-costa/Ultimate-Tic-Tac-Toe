@@ -50,6 +50,21 @@ The Ultimate Tic-Tac-Toe game is an extended version of the classic Tic-Tac-Toe,
 3. 'Tab' allows switching between smaller grids. (only initially, -i.e- before making a move)...
 4. The game ends when a player wins, it's a draw, or the player chooses to exit.
 
+## INSTALLATION : 
+
+1. Go To the `Releases section`,<br>
+CLICK https://github.com/Haysten-D-costa/Ultimate-Tic-Tac-Toe-Game-C-plus-plus/releases ....
+
+2. Scroll Down to the `Assets section` and download the Files Required....
+
+3. Download 
+https://github.com/Haysten-D-costa/Ultimate-Tic-Tac-Toe-Game-C-plus-plus/releases/download/v1.0.0/UltimateTTToe.exe <br>
+and run the `UltimateTTToe.exe` file....
+
+4. `OR` Download https://github.com/Haysten-D-costa/Ultimate-Tic-Tac-Toe-Game-C-plus-plus/releases/download/v1.0.0/UltimateTTToe_Installer.zip <br>
+`UltimateTTToe_Installer.zip` and extract and run the `UltimateTTToe.exe` file....
+
+
 ## COMPILATION : 
 
 To compile the program, you can use a C++ compiler. For example:
