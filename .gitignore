@@ -1,3 +1,5 @@
 *.o
 Private
 Updates
+.vscode
+.vs

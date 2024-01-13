@@ -1,9 +1,6 @@
 // *  THE ULTIMATE TIC-TAC-TOE GAME ! 
 
-
 //!   LATEST UPDATE ON : Thursday, 04-01-2024
-//?   UPDATES : Updated the 'O' mark symbol...... 
-//=>  TODO    : Change the zip file i.e add the new compiled file
 
 #include <vector>
 #include <cstdlib>
@@ -166,31 +163,31 @@ void displayMsg(int x, int y, std::string msg, const char* color) {
 void display() {
     clearConsole();
     std::cout << CYAN_TEXT << "              'ULTIMATE' TIC-TAC-TOE" << RESET << std::endl
-              << "ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿  ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿" << std::endl
-              << "³  ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿  ³  ³ " << CYAN_BACKGROUND << "               " << RESET << CYAN_TEXT << " GAME STATISTICS " << RESET << CYAN_BACKGROUND << "               " << RESET << " ³" << std::endl
-              << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´" << std::endl
-              << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³                                                 ³" << std::endl
-              << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³     " << CYAN_TEXT << "PLAYER 1  : " << RESET << "                                ³" << std::endl
-              << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³     Name   :                                    ³" << std::endl
-              << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³     Symbol : " << RED_TEXT << "'X'"<< RESET << "                                |" << std::endl
-              << "³  ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ  ³  ³                                                 ³" << std::endl
-              << "³  ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÎÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÎÍÍÍÍÍÍÍÍÍÍÍÍÍÍ  ³  ³     " << CYAN_TEXT << "PLAYER 2  : " << RESET << "                                ³" << std::endl
-              << "³  ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿  ³  ³     Name   :                                    ³" << std::endl
-              << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³     Symbol : " << RED_TEXT << "'O'"<< RESET << "                                |" << std::endl
-              << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³                                                 ³" << std::endl
-              << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³     " << CYAN_TEXT << "ERROR : " << RESET << "                                    ³" << std::endl
-              << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³                                                 ³" << std::endl
-              << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³     HOW TO PLAY ?                               ³" << std::endl
-              << "³  ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ  ³  ³                                                 ³" << std::endl
-              << "³  ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÎÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÎÍÍÍÍÍÍÍÍÍÍÍÍÍÍ  ³  ³     1. Set valid player names...                ³" << std::endl
-              << "³  ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿  ³  ³     2. The first player gets to choose a grid   ³" << std::endl
-              << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³        to do so, use the 'Tab' key...           ³" << std::endl
-              << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³     3. To make a move, use the 'Enter key'...   ³" << std::endl
-              << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³     4. After move, changing grid is no more     ³" << std::endl
-              << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³        allowed...                               ³" << std::endl
-              << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³                                                 ³" << std::endl
-              << "³  ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ  ³  ³                                                 ³" << std::endl
-              << "ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ  ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ" << std::endl;
+        << "ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿  ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿" << std::endl
+        << "³  ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿  ³  ³ " << CYAN_BACKGROUND << "               " << RESET << CYAN_TEXT << " GAME STATISTICS " << RESET << CYAN_BACKGROUND << "               " << RESET << " ³" << std::endl
+        << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´" << std::endl
+        << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³                                                 ³" << std::endl
+        << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³     " << CYAN_TEXT << "PLAYER 1  : " << RESET << "                                ³" << std::endl
+        << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³     Name   :                                    ³" << std::endl
+        << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³     Symbol : " << RED_TEXT << "'X'"<< RESET << "                                |" << std::endl
+        << "³  ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ  ³  ³                                                 ³" << std::endl
+        << "³  ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÎÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÎÍÍÍÍÍÍÍÍÍÍÍÍÍÍ  ³  ³     " << CYAN_TEXT << "PLAYER 2  : " << RESET << "                                ³" << std::endl
+        << "³  ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿  ³  ³     Name   :                                    ³" << std::endl
+        << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³     Symbol : " << RED_TEXT << "'O'"<< RESET << "                                |" << std::endl
+        << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³                                                 ³" << std::endl
+        << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³     " << CYAN_TEXT << "ERROR : " << RESET << "                                    ³" << std::endl
+        << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³                                                 ³" << std::endl
+        << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³                                                 ³" << std::endl
+        << "³  ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ  ³  ³                                                 ³" << std::endl
+        << "³  ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÎÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÎÍÍÍÍÍÍÍÍÍÍÍÍÍÍ  ³  ³                                                 ³" << std::endl
+        << "³  ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿ º ÚÄÄÄÂÄÄÄÂÄÄÄ¿  ³  ³                                                 ³" << std::endl
+        << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³                                                 ³" << std::endl
+        << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³                                                 ³" << std::endl
+        << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³                                                 ³" << std::endl
+        << "³  ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´ º ÃÄÄÄÅÄÄÄÅÄÄÄ´  ³  ³                                                 ³" << std::endl
+        << "³  ³   ³   ³   ³ º ³   ³   ³   ³ º ³   ³   ³   ³  ³  ³                                                 ³" << std::endl
+        << "³  ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ º ÀÄÄÄÁÄÄÄÁÄÄÄÙ  ³  ³                                                 ³" << std::endl
+        << "ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ  ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ" << std::endl;
 }
 
 /**
@@ -262,15 +259,15 @@ void markWon(char player, int gNo) {
         util::gotoXY(rows[gNo-1], cols[gNo-1]+4); std::cout << "     / \\      ";
         util::gotoXY(rows[gNo-1], cols[gNo-1]+5); std::cout << "  __/   \\__   ";
         util::gotoXY(rows[gNo-1], cols[gNo-1]+6); std::cout << "              ";
-    
+
     } else {
-        util::gotoXY(rows[gNo-1], cols[gNo-1]  ); std::cout << "   ÄÄÄÄÄÄÄ   ";
-        util::gotoXY(rows[gNo-1], cols[gNo-1]+1); std::cout << " /         \\  ";
-        util::gotoXY(rows[gNo-1], cols[gNo-1]+2); std::cout << "{           }";
-        util::gotoXY(rows[gNo-1], cols[gNo-1]+3); std::cout << "|           |";
-        util::gotoXY(rows[gNo-1], cols[gNo-1]+4); std::cout << "{           }";
-        util::gotoXY(rows[gNo-1], cols[gNo-1]+5); std::cout << " \\         /  ";
-        util::gotoXY(rows[gNo-1], cols[gNo-1]+6); std::cout << "   ÄÄÄÄÄÄÄ   ";
+            util::gotoXY(rows[gNo-1], cols[gNo-1]  ); std::cout << "   ÄÄÄÄÄÄÄ   ";
+            util::gotoXY(rows[gNo-1], cols[gNo-1]+1); std::cout << " /         \\  ";
+            util::gotoXY(rows[gNo-1], cols[gNo-1]+2); std::cout << "{           }";
+            util::gotoXY(rows[gNo-1], cols[gNo-1]+3); std::cout << "|           |";
+            util::gotoXY(rows[gNo-1], cols[gNo-1]+4); std::cout << "{           }";
+            util::gotoXY(rows[gNo-1], cols[gNo-1]+5); std::cout << " \\         /  ";
+            util::gotoXY(rows[gNo-1], cols[gNo-1]+6); std::cout << "   ÄÄÄÄÄÄÄ   ";
     }
 }
 
@@ -404,6 +401,9 @@ void playerMove(char player) {
         }
         char highlight = 219;
         util::gotoXY(util::getXCoordinates(x), util::getYCoordinates(y)); // to indicate current position....
+        // std::cout << highlight << highlight;
+        // sleep(0.2);
+        // util::clearXY(util::getXCoordinates(x), util::getYCoordinates(y), 1);
     }
 }
 
@@ -412,20 +412,101 @@ void playerMove(char player) {
  * of Player 1 and Player 2, and then displaying the names on the screen.
  */
 void initPlayers() { // sets the player details....
-    display();
-    util::gotoXY(60, 16); std::cout << YELLOW_TEXT << "RULES OF THE GAME !" << RESET;
-    util::gotoXY(60, 18); std::cout << YELLOW_TEXT << "1. Set valid player names..." << RESET;
-    util::gotoXY(60, 19); std::cout << YELLOW_TEXT << "2. The first player gets to choose a grid" << RESET;
-    util::gotoXY(60, 20); std::cout << YELLOW_TEXT << "   to do so, use the 'Tab' key..." << RESET;
-    util::gotoXY(60, 21); std::cout << YELLOW_TEXT << "3. To make a move, use the 'Enter key'..." << RESET;
-    util::gotoXY(60, 22); std::cout << YELLOW_TEXT << "4. After move, changing grid is no more" << RESET;
-    util::gotoXY(60, 23); std::cout << YELLOW_TEXT << "   allowed..." << RESET;
-    util::gotoXY(60, 25); pauseConsole();
-    util::clearXY(60, 16, 19); util::clearXY(60, 18, 28);
-    util::clearXY(60, 19, 41); util::clearXY(60, 20, 33);
-    util::clearXY(60, 21, 41); util::clearXY(60, 22, 39);
-    util::clearXY(60, 23, 13); util::clearXY(60, 25, 32);
+    clearConsole();
+    std::cout << "ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿" << std::endl
+              << "³ ÚÄÄÄÄÄÄÄÄ¿ ÚÄÄ¿  ÚÄÄ¿ ÚÄÄÄÄÄÄÄ¿                                                                      ³" << std::endl
+              << "³ "<<CYAN_BACKGROUND<<"ÀÄÄ¿  ÚÄÄ"<<RESET<<"Ù "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³  "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³ "<<CYAN_BACKGROUND<<"³  ÚÄÄÄÄ"<<RESET<<"Ù                                                                      ³" << std::endl
+              << "³    "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³    "<<CYAN_BACKGROUND<<"³  "<<RESET<<"ÀÄÄ"<<CYAN_BACKGROUND<<"Ù  "<<RESET<<"³ "<<CYAN_BACKGROUND<<"³  "<<RESET<<"ÀÄÄÄÄ¿                                                                      ³" << std::endl
+              << "³    "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³    "<<CYAN_BACKGROUND<<"³  ÚÄÄ"<<CYAN_BACKGROUND<<"¿  "<<RESET<<"³ "<<CYAN_BACKGROUND<<"³  ÚÄÄÄÄ"<<RESET<<"Ù                                                                      ³" << std::endl
+              << "³    "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³    "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³  "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³ "<<CYAN_BACKGROUND<<"³  "<<RESET<<"ÀÄÄÄÄ¿                                                                      ³" << std::endl
+              << "³    "<<CYAN_BACKGROUND<<"ÀÄÄ"<<RESET<<"Ù    "<<CYAN_BACKGROUND<<"ÀÄÄ"<<RESET<<"Ù  "<<CYAN_BACKGROUND<<"ÀÄÄ"<<RESET<<"Ù "<<CYAN_BACKGROUND<<"ÀÄÄÄÄÄÄÄ"<<RESET<<"Ù                                                                      ³" << std::endl
+              << "³ ÚÄÄ¿  ÚÄÄ¿ ÚÄÄ¿   ÚÄÄÄÄÄÄÄÄ¿ ÚÄÄ¿ ÚÄÄÄÄÄÄÄÄÄ¿ ÚÄÄÄÄÄÄÄ¿ ÚÄÄÄÄÄÄÄÄ¿ ÚÄÄÄÄÄÄÄ¿                         ³" << std::endl
+              << "³ "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³  "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³ "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³   "<<CYAN_BACKGROUND<<"ÀÄÄ¿  ÚÄÄ"<<RESET<<"Ù "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³ "<<CYAN_BACKGROUND<<"³  Ú¿ Ú¿  "<<RESET<<"³ "<<CYAN_BACKGROUND<<"³  ÚÄ"<<CYAN_BACKGROUND<<"¿  "<<RESET<<"³ "<<CYAN_BACKGROUND<<"ÀÄÄ¿  ÚÄÄ"<<RESET<<"Ù "<<CYAN_BACKGROUND<<"³  ÚÄÄÄÄ"<<RESET<<"Ù                         ³" << std::endl
+              << "³ "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³  "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³ "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³      "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³    "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³ "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³"<<CYAN_BACKGROUND<<"³ "<<RESET<<"³"<<CYAN_BACKGROUND<<"³  "<<RESET<<"³ "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³ "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³    "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³    "<<CYAN_BACKGROUND<<"³  "<<RESET<<"ÀÄÄÄÄ¿                         ³" << std::endl
+              << "³ "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³  "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³ "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³      "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³    "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³ "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³"<<CYAN_BACKGROUND<<"³ "<<RESET<<"³"<<CYAN_BACKGROUND<<"³  "<<RESET<<"³ "<<CYAN_BACKGROUND<<"³  "<<RESET<<"ÀÄ"<<CYAN_BACKGROUND<<"Ù  "<<RESET<<"³    "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³    "<<CYAN_BACKGROUND<<"³  ÚÄÄÄÄ"<<RESET<<"Ù                         ³" << std::endl
+              << "³ "<<CYAN_BACKGROUND<<"³  "<<RESET<<"ÀÄÄ"<<CYAN_BACKGROUND<<"Ù  "<<RESET<<"³ "<<CYAN_BACKGROUND<<"³  "<<RESET<<"ÀÄÄÄÄ¿ "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³    "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³ "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³"<<CYAN_BACKGROUND<<"³ "<<RESET<<"³"<<CYAN_BACKGROUND<<"³  "<<RESET<<"³ "<<CYAN_BACKGROUND<<"³  ÚÄ¿  "<<RESET<<"³    "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³    "<<CYAN_BACKGROUND<<"³  "<<RESET<<"ÀÄÄÄÄ¿                         ³" << std::endl
+              << "³ "<<CYAN_BACKGROUND<<"ÀÄÄÄÄÄ"<<CYAN_BACKGROUND<<"ÄÄÄ"<<RESET<<"Ù "<<CYAN_BACKGROUND<<"ÀÄÄÄÄÄÄÄ"<<RESET<<"Ù "<<CYAN_BACKGROUND<<"ÀÄÄ"<<RESET<<"Ù    "<<CYAN_BACKGROUND<<"ÀÄÄ"<<RESET<<"Ù "<<CYAN_BACKGROUND<<"ÀÄÄ"<<RESET<<"Ù"<<CYAN_BACKGROUND<<"ÀÄ"<<RESET<<"Ù"<<CYAN_BACKGROUND<<"ÀÄÄ"<<RESET<<"Ù "<<CYAN_BACKGROUND<<"ÀÄÄ"<<RESET<<"Ù "<<CYAN_BACKGROUND<<"ÀÄÄ"<<RESET<<"Ù    "<<CYAN_BACKGROUND<<"ÀÄÄ"<<RESET<<"Ù    "<<CYAN_BACKGROUND<<"ÀÄÄÄÄÄÄÄ"<<RESET<<"Ù                         ³" << std::endl
+              << "³ ÚÄÄÄÄÄÄÄÄ¿ ÚÄÄ¿ ÚÄÄÄÄÄÄÄ¿    ÚÄÄÄÄÄÄÄÄ¿ ÚÄÄÄÄÄÄÄ¿ ÚÄÄÄÄÄÄÄ¿    ÚÄÄÄÄÄÄÄÄ¿ ÚÄÄÄÄÄÄÄ¿ ÚÄÄÄÄÄÄÄ¿        ³" << std::endl
+              << "³ "<<CYAN_BACKGROUND<<"ÀÄÄ¿  ÚÄÄ"<<RESET<<"Ù "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³ "<<CYAN_BACKGROUND<<"³  ÚÄÄÄÄ"<<RESET<<"Ù    "<<CYAN_BACKGROUND<<"ÀÄÄ¿  ÚÄÄ"<<RESET<<"Ù "<<CYAN_BACKGROUND<<"³  ÚÄ"<<CYAN_BACKGROUND<<"¿  "<<RESET<<"³ "<<CYAN_BACKGROUND<<"³  ÚÄÄÄÄ"<<RESET<<"Ù    "<<CYAN_BACKGROUND<<"ÀÄÄ¿  ÚÄÄ"<<RESET<<"Ù "<<CYAN_BACKGROUND<<"³  ÚÄ¿  "<<RESET<<"³ "<<CYAN_BACKGROUND<<"³  ÚÄÄÄÄ"<<RESET<<"Ù        ³" << std::endl
+              << "³    "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³    "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³ "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³     ÚÄÄ¿   "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³    "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³ "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³ "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³     ÚÄÄ¿   "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³    "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³ "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³ "<<CYAN_BACKGROUND<<"³  "<<RESET<<"ÀÄÄÄÄ¿        ³" << std::endl
+              << "³    "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³    "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³ "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³     "<<CYAN_BACKGROUND<<"ÀÄÄ"<<RESET<<"Ù   "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³    "<<CYAN_BACKGROUND<<"³  "<<RESET<<"ÀÄ"<<CYAN_BACKGROUND<<"Ù  "<<RESET<<"³ "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³     "<<CYAN_BACKGROUND<<"ÀÄÄ"<<RESET<<"Ù   "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³    "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³ "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³ "<<CYAN_BACKGROUND<<"³  ÚÄÄÄÄ"<<RESET<<"Ù        ³" << std::endl
+              << "³    "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³    "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³ "<<CYAN_BACKGROUND<<"³  "<<RESET<<"ÀÄÄÄÄ¿       "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³    "<<CYAN_BACKGROUND<<"³  ÚÄ¿  "<<RESET<<"³ "<<CYAN_BACKGROUND<<"³  "<<RESET<<"ÀÄÄÄÄ¿       "<<CYAN_BACKGROUND<<"³  "<<RESET<<"³    "<<CYAN_BACKGROUND<<"³  "<<RESET<<"ÀÄ"<<CYAN_BACKGROUND<<"Ù  "<<RESET<<"³ "<<CYAN_BACKGROUND<<"³  "<<RESET<<"ÀÄÄÄÄ¿ ÚÄ¿ÚÄ¿ ³" << std::endl
+              << "³    "<<CYAN_BACKGROUND<<"ÀÄÄ"<<RESET<<"Ù    "<<CYAN_BACKGROUND<<"ÀÄÄ"<<RESET<<"Ù "<<CYAN_BACKGROUND<<"ÀÄÄÄÄÄÄÄ"<<RESET<<"Ù       "<<CYAN_BACKGROUND<<"ÀÄÄ"<<RESET<<"Ù    "<<CYAN_BACKGROUND<<"ÀÄÄ"<<RESET<<"Ù "<<CYAN_BACKGROUND<<"ÀÄÄ"<<RESET<<"Ù "<<CYAN_BACKGROUND<<"ÀÄÄÄÄÄÄÄ"<<RESET<<"Ù       "<<CYAN_BACKGROUND<<"ÀÄÄ"<<RESET<<"Ù    "<<CYAN_BACKGROUND<<"ÀÄÄÄÄÄÄÄ"<<RESET<<"Ù "<<CYAN_BACKGROUND<<"ÀÄÄÄÄÄÄÄ"<<RESET<<"Ù "<<CYAN_BACKGROUND<<"ÀÄ"<<RESET<<"Ù"<<CYAN_BACKGROUND<<"ÀÄ"<<RESET<<"Ù"<<RESET<<" ³" << std::endl
+              << "³                                                                                                      ³" << std::endl
+              << "³                                                                                                      ³" <<RESET<< std::endl
+              << "³                                                "<<GREEN_TEXT<<">  Right-arrow Key"<<RESET<<" - To next page . . . . . .         ³" <<RESET<< std::endl
+              << "³                                                "<<GREEN_TEXT<<">  Enter  Key     "<<RESET<<" - To proceed to game . . .         ³" <<RESET<< std::endl
+              << "³                                                "<<GREEN_TEXT<<">  Escape Key     "<<RESET<<" - To terminatee game . . .         ³" <<RESET<< std::endl
+              << "³                                                                                                      ³" <<RESET<< std::endl
+              << "³                                                                                                      ³" << std::endl
+              << "ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ" << std::endl;
 
+    util::gotoXY(0, 0);
+    while(true) {
+        static int doc_count = 0;
+        int key = _getch();
+        if(key == 13) { // proceed to the game....
+            util::gotoXY(10, 26); 
+            util::loading(); 
+            break;
+        }
+        else if(key == 27) {
+            util::gotoXY(0,32);
+            exit(1);
+        }
+        else if(key == 77) {
+            
+            doc_count++;
+            std::string msg1 = "    The Ultimate Tic-Tac-Toe game is an extended version of the classic Tic-Tac-Toe,\n³     played on a 9x9 grid of smaller Tic-Tac-Toe boards. Players take turns making moves within\n³     the smaller grids, and winning a smaller grid grants control of the corresponding larger grid.\n³     The goal is to win three smaller grids in a row, either horizontally,\n³     vertically, or diagonally.\n³";
+            std::string msg2 = " - Player Initialization with error handling,\n³     - Dynamic and colorful console display with play turn indicators, etc, . . .\n³     - Moving and placing using ARROW KEYS !! (Up|Down|Left|Right) to navigate within grid\n³     - Grid Switching using TAB KEY !! (only during 1st move),\n³     - Ending Game when required with confirmation using ESCAPE KEY !!\n³     - Invalid / Error move prompt messages displayed,\n³     - Proper tested and verified Win / Lose / Draw condition checks,\n³     - Automatic Movement, players dont need to navigate themselves auto move placement functionality.\n";
+            if(doc_count == 2) {
+                msg1 = "\n³     1. Initialize both players, note that player 1 is designated by 'X' and the player 2 is\n³        designated by 'O', this cannot be changed.\n³     2. The game begins, the player X is allowed to select a required grid. The tab functionality\n³        can be used to switch to a required grid, after 1st move, this functionality will be\n³        disabled. Next player cannot switch the grids anymore.\n³     3. From now on, the players will be automatically taken to the appropriate position based on\n³        the move played by the previous player. This is verified and no errors will occur...\n³                                              \n³     4. On selecting a grid which is already won, the player will be directed to a grid position\n³        which was last played to win that overall grid..\n³        ALL THIS IS DONE BY THE GAME LOGIC and players need not worry about the same !!!\n³                                            \n³     5. WIN, DRAW, LOSE, or any ERROR Moves are all indicated by the logic. . .\n³        This makes it a very user friendly game !\n";
+                msg2 = "";
+            } 
+            if(doc_count == 3) { 
+                util::gotoXY(10, 26); 
+                util::loading(); 
+                break; 
+            }
+            clearConsole();
+            std::cout << "ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿" << std::endl
+                      << "³ "<<CYAN_TEXT<<"The Ultimate Tic-Tac-Toe Documentation :"<<RESET<<"                                                             ³" << std::endl
+                      << "³                                                                                                      ³" << std::endl
+                      << "³  >  About the Game :                                                                                 ³" << std::endl
+                      << "³                                                                                                      ³" << std::endl
+                      << "³                                                                                                      ³" << std::endl
+                      << "³                                                                                                      ³" << std::endl
+                      << "³                                                                                                      ³" << std::endl
+                      << "³                                                                                                      ³" << std::endl
+                      << "³                                                                                                      ³" << std::endl
+                      << "³  >  Functionalities :                                                                                ³" << std::endl
+                      << "³                                                                                                      ³" << std::endl
+                      << "³                                                                                                      ³" << std::endl
+                      << "³                                                                                                      ³" << std::endl
+                      << "³                                                                                                      ³" << std::endl
+                      << "³                                                                                                      ³" << std::endl
+                      << "³                                                                                                      ³" << std::endl
+                      << "³                                                                                                      ³" << std::endl
+                      << "³                                                                                                      ³" << std::endl
+                      << "³                                                                                                      ³" << std::endl
+                      << "³                                                                                                      ³" << std::endl
+                      << "³                                                "<<GREEN_TEXT<<">  Right-arrow Key"<<RESET<<" - To next page . . . . . .         ³" << std::endl
+                      << "³                                                "<<GREEN_TEXT<<">  Enter  Key     "<<RESET<<" - To proceed to game . . .         ³" << std::endl
+                      << "³                                                "<<GREEN_TEXT<<">  Escape Key     "<<RESET<<" - To terminatee game . . .         ³" << std::endl
+                      << "³                                                                                                      ³" << std::endl
+                      << "³                                                                                                      ³" << std::endl
+                      << "ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ" << std::endl;   
+            util::gotoXY(7,5);  std::cout << YELLOW_TEXT << msg1;
+            util::gotoXY(6,13); std::cout << YELLOW_TEXT << msg2;
+            util::gotoXY(0,0);
+            
+        }
+        else {
+            util::gotoXY(78,26);
+            std::cout << RED_TEXT << "Invalid operation ! . . ." << RESET;
+        }
+    }
+    display();
     while (true) {
         util::gotoXY(60, 17);
         std::cout << GREEN_TEXT << "Enter Player 1 name : " << RESET; 
@@ -469,16 +550,19 @@ int main() {
             util::gotoXY(67, 17); 
             std::cout << GREEN_TEXT << "ITS A DRAW !" << RESET;
             util::gotoXY(0, 28);
+            system("pause"); 
             exit(1);
         } else if(result == 'X') {
             util::gotoXY(67, 17); 
             std::cout << GREEN_TEXT << player_1 << " is the WINNER !" << RESET;
             util::gotoXY(0, 28);
+            system("pause"); 
             exit(1);
         } else if(result == 'O') {
             util::gotoXY(67, 17); 
             std::cout << GREEN_TEXT << player_2 << " is the WINNER !" << RESET;
             util::gotoXY(0, 28);
+            system("pause"); 
             exit(1);
         } else {
             // do nothing....
@@ -490,16 +574,19 @@ int main() {
             util::gotoXY(67, 17); 
             std::cout << GREEN_TEXT << "ITS A DRAW !" << RESET;
             util::gotoXY(0, 28);
+            system("pause"); 
             exit(1);
         } else if(result == 'X') {
             util::gotoXY(67, 17); 
             std::cout << GREEN_TEXT << player_1 << " is the WINNER !" << RESET;
             util::gotoXY(0, 28);
+            system("pause"); 
             exit(1);
         } else if(result == 'O') {
             util::gotoXY(67, 17); 
             std::cout << GREEN_TEXT << player_2 << " is the WINNER !" << RESET;
             util::gotoXY(0, 28);
+            system("pause"); 
             exit(1);
         } else {
             // do nothing....

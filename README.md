@@ -4,6 +4,14 @@ This C++ program implements the `"Ultimate"` Tic-Tac-Toe game, a variation of th
 
 ## DEMO : 
 
+- ` NEW : ` UI is now updated !! with best text animations and a loading animation as well !
+- ` NEW : ` Documentation displayed and rules of the game explained before you play....
+
+![UltimateTTToe](/DemoImages/U2_2.png)
+
+![UltimateTTToe](/DemoImages/U2_3.png)
+![UltimateTTToe](/DemoImages/U2_4.png)
+
 ![UltimateTTToe](/DemoImages/01.png)
 
 ![UltimateTTToe](/DemoImages/02.png)
@@ -86,13 +94,13 @@ and run the `UltimateTTToe.exe` file....
 
 ## COMPILATION : 
 
-To compile the program, you can use a C++ compiler. For example:
+To enable static linking : 
 ```bash
 
 //? TO COMPILE :
 g++ -c console_utils.cpp -o console_utils.o
 g++ -c UltimateTTToe.cpp -o UltimateTTToe.o
-g++ console_utils.o UltimateTTToe.o -o UltimateTTToe
+g++ -static-libgcc console_utils.o UltimateTTToe.o -o UltimateTTToe
 
 //? TO RUN : 
-UltimateTTToe.exe
+UltimateTTToe

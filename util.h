@@ -2,6 +2,8 @@
 #define UTIL_H
 
     #include <iostream>
+    #include <windows.h>
+    #include "textstyling.h"
     namespace util { /* Utility namespace */
 
         int getXCoordinates(int index) {
@@ -18,6 +20,19 @@
             for(int i=0; i<length; i++) {
                 printf(" ");
             }
+        }
+        void loading() {/* FUNCTION TO DISPLAY LOADING PROCESS IN ANY PAGE.... */
+            char x = 219;
+            std::cout << "Loading ";
+            for(int i=0; i< 55; i++) 
+            {
+                std::cout << GREEN_TEXT << x;
+                if(i < 10) { Sleep(150); }
+                if(i>=10 && i<20) { Sleep(50); }
+                if(i >= 10) { Sleep(25); }
+            }
+            system("cls");
+            std::cout << RESET;
         }
     }
 
